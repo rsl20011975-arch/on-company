@@ -1,0 +1,6 @@
+.env
+*.tmp
+state/audio_work/
+brand/_html/
+reels/*_frames/
+__pycache__/

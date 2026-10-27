@@ -1,0 +1,47 @@
+diff --git a/shared/lyria/bank.py b/shared/lyria/bank.py
+index 57a0dcbb..5c45dfc6 100644
+--- a/shared/lyria/bank.py
++++ b/shared/lyria/bank.py
+@@ -51,6 +51,16 @@ CHANNEL_PROMPTS = {
+         "Easygoing daytime instrumental. Ukulele strums, light shaker groove, warm bass, "
+         "small bell accents, around 96 BPM, tidy and positive, steady energy throughout.",
+     ],
++    # 2026-10-27: ON Company(AI 사장 온) 인스타 릴스. 타이포 모션·내레이션 밑에 깔리는 차갑고 정밀한 테크 무드.
++    "on": [
++        "Minimal modern tech instrumental for fast vertical videos. Tight punchy electronic drums, "
++        "deep warm sub-bass, crisp hi-hats, short glassy synth stabs, around 112 BPM, confident and "
++        "precise, leaves the 300-3000Hz range open for a spoken voice.",
++        "Sleek future-garage instrumental. Shuffled two-step drums, soft pads, airy vocal-free textures, "
++        "subtle clicks and glitches, around 128 BPM half-time feel, focused and curious.",
++        "Clean cinematic pulse instrumental. Ticking percussion, rising synth arpeggio, low rumble, "
++        "building momentum without a melodic hook, around 100 BPM, smart and suspenseful.",
++    ],
+     "money": [
+         "Modern investigative-documentary instrumental. Subtle tension strings, "
+         "steady ticking percussion, low sustained synth bass, restrained piano "
+diff --git a/shared/tools/tick.py b/shared/tools/tick.py
+index 4a97fed0..ed802e91 100644
+--- a/shared/tools/tick.py
++++ b/shared/tools/tick.py
+@@ -23,6 +23,9 @@ from shared.tools import schedule_config as cfg
+ from shared.tools import run_store as runs
+ from shared.tools.notify import send as notify
+ 
++import os
++ON_ROOT = Path(os.environ.get("ON_ROOT", r"D:\on-company"))
++
+ # 채널 이름 -> [실행할 스크립트, 인자...] (sys.executable 뒤에 그대로 붙는다)
+ ENTRIES = {
+     # 2026-09-26: 옛 daily.py(제목만 보고 상상)를 버리고 line/story/auto.py(소화→조사→기획→제작→
+@@ -49,6 +52,11 @@ ENTRIES = {
+     "appliance_compare": ["-m", "appliance_guide.factory.scheduled", "compare"],
+     "appliance_recommend": ["-m", "appliance_guide.factory.scheduled", "recommend"],
+     "appliance_questions": ["-m", "appliance_guide.factory.scheduled", "questions"],
++    # 2026-10-27: ON Company(AI 사장 온의 인스타그램) 공장 - 사장실(클라우드)이 레포에 넣은 것을 발행·수집·댓글 게시만 한다.
++    # 판단은 하지 않는다. 레포 위치는 환경변수 ON_ROOT(기본 D:\on-company). 설명: <ON_ROOT>\00_온컴퍼니_운영설계서.md 2장.
++    "on_daily": [str(ON_ROOT / "on_factory" / "run.py"), "daily"],
++    "on_collect": [str(ON_ROOT / "on_factory" / "run.py"), "collect"],
++    "on_comments": [str(ON_ROOT / "on_factory" / "run.py"), "comments"],
+ }
+ 
+ 

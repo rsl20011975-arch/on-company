@@ -1,0 +1,40 @@
+<!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="../system.css">
+<style>html,body{width:1080px;height:1920px}#s{position:relative;width:1080px;height:1920px;overflow:hidden;background:var(--ink)}
+.L{position:absolute;left:90px;right:150px}.w{display:inline-block;overflow:hidden;vertical-align:bottom;padding-bottom:.08em}.w>span{display:inline-block}
+.grid2{position:absolute;inset:-90px;background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);background-size:90px 90px;opacity:.5;-webkit-mask-image:radial-gradient(ellipse 80% 60% at 50% 45%,#000 30%,transparent 100%)}</style>
+</head><body><div id="s"></div><script src="engine.js"></script><script>
+const ty=(t,s,a,sp=.03)=>s.slice(0,Math.floor(clamp((t-a)/sp,0,s.length)));
+const cur=t=>Math.floor(t*3)%2?'':'<span class="k">▋</span>';
+const SCENES=[
+ [0,2.8,(t)=>{const x=exitK(t,2.45);const st=bo(p(t,1.0,.45));
+  return `<div class="L" style="top:520px;opacity:${1-x}">
+   <div class="d2" style="font-size:92px">${words('AI한테',t,0,.06,.4)}<br>${words('이렇게 시키면',t,.12,.06,.4)}</div>
+   <div class="win" style="margin-top:60px"><div class="bar"><i></i><i></i><i></i><span>before.txt</span></div>
+    <div class="code" style="font-size:52px;font-family:var(--sans);font-weight:600;padding:44px 40px;position:relative"><span class="k" style="font-family:var(--mono)">&gt;</span> ${ty(t,'인스타 캡션 써줘',.25,.05)}${t<1?cur(t):''}
+     <div style="position:absolute;left:30px;right:30px;top:50%;height:8px;background:var(--coral);border-radius:4px;transform:scaleX(${eo(p(t,.95,.35))});transform-origin:left"></div></div></div>
+   <div style="margin-top:60px;font-size:120px;font-weight:900;letter-spacing:-.05em;color:var(--coral);transform:scale(${.4+.6*st}) rotate(${(1-clamp(st))*-8}deg);transform-origin:left center;opacity:${clamp(st*1.5)}">평균이 나옵니다.</div></div>`}],
+ [2.8,6.0,(t)=>{const x=exitK(t,2.85);const L=[['역할','10만 계정을 키운 마케터'],['상황','AI가 운영하는 실험 계정'],['독자','AI가 궁금한 30대 직장인'],['요청','첫 게시물 캡션, 3안']];
+  return `<div class="L" style="top:500px;opacity:${1-x}">
+   <div style="font-family:var(--mono);font-size:30px;letter-spacing:.1em;color:var(--lime);opacity:${eo(p(t,0,.3))}">AFTER — CEO MODE</div>
+   <div class="d2" style="font-size:92px;margin-top:24px">${words('사장은',t,0,.06,.45)}<br>${words('이렇게 시킵니다.',t,.12,.06,.45)}</div>
+   <div class="win" style="margin-top:56px;transform:translateY(${(1-eo(p(t,.3,.6)))*80}px);opacity:${eo(p(t,.3,.4))}"><div class="bar"><i></i><i></i><i></i><span>after.txt</span></div>
+    <div class="code" style="font-size:40px;line-height:1.9">${L.map(([k,v],i)=>{const a=.7+i*.42;const vis=t>a;return vis?`<span class="ln">${String(i+1).padStart(2,'0')}</span><span class="p">${k}:</span> <span class="kr" style="font-size:42px">${ty(t,v,a+.12,.025)}</span>`:''}).filter(Boolean).join('<br>')}${cur(t)}</div></div></div>`}],
+ [6.0,9.4,(t)=>{const x=exitK(t,3.05);const F=['역할을 먼저 준다','모양을 숫자로 정한다','금지 목록을 붙인다','3개 뽑고 고른다','결과를 돌려준다'];
+  return `<div class="L" style="top:440px;opacity:${1-x}">
+   <div class="d2" style="font-size:88px">${words('공식은',t,0,.06,.4)} <span class="w"><span class="lime en" style="font-size:130px;transform:translateY(${(1-eo(p(t,.12,.5)))*110}%)">5</span></span>${words('개.',t,.2,.06,.4)}</div>
+   <div style="margin-top:50px;display:flex;flex-direction:column">${F.map((f,i)=>{const k=bo(p(t,.45+i*.38,.45));const on=t>.45+i*.38+.2;
+    return `<div style="display:flex;gap:34px;align-items:baseline;padding:26px 0;border-top:1px solid var(--line2);opacity:${clamp(k)};transform:translateX(${(1-clamp(k))*120}px)">
+     <span class="en" style="font-size:72px;color:${on?'var(--lime)':'var(--mute)'};line-height:1">0${i+1}</span><span style="font-size:58px;font-weight:800;letter-spacing:-.04em">${f}</span></div>`}).join('')}</div></div>`}],
+ [9.4,12.0,(t)=>{const x=exitK(t,2.25);
+  return `<div class="L" style="top:640px;opacity:${1-x}">
+   <div class="d1" style="font-size:140px">${words('같은 AI.',t,0)}</div>
+   <div class="d1" style="font-size:140px;margin-top:20px">${words('지시만',t,.35)} <span class="w"><span class="lime" style="transform:translateY(${(1-eo(p(t,.5,.55)))*110}%);text-shadow:0 0 60px rgba(198,255,61,.5)">바꿨습니다.</span></span></div>
+   <div style="margin-top:60px;font-family:var(--mono);font-size:30px;color:var(--soft);letter-spacing:.04em;opacity:${eo(p(t,1.0,.5))}">같은 질문, 다른 결과. 직접 해보세요.</div></div>`}],
+ [12.0,15.6,(t)=>{const k=bo(p(t,.6,.6));const k2=bo(p(t,1.3,.6));
+  return `<div class="L" style="top:560px">
+   <div class="d2" style="font-size:96px">${words('공식 5개 전문은',t,0)}</div>
+   <div style="margin-top:44px;display:inline-flex;align-items:center;gap:26px;padding:34px 46px;border-radius:30px;background:var(--lime);color:var(--ink);font-size:84px;font-weight:900;letter-spacing:-.045em;transform:scale(${.5+.5*k});transform-origin:left center;opacity:${clamp(k*1.5)};box-shadow:0 30px 120px rgba(198,255,61,.35)">📌 프로필 고정 카드</div>
+   <div style="margin-top:56px;opacity:${clamp(k2*1.4)};transform:translateY(${(1-clamp(k2))*40}px);font-size:54px;font-weight:700;letter-spacing:-.035em;color:var(--soft)">저장해 두고 AI 열 때 꺼내 쓰세요.</div></div></div>`}],
+];
+window.TOTAL=15.6;window.render=makeRender(SCENES,15.6);window.render(0);
+</script></body></html>
