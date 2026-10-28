@@ -1,0 +1,81 @@
+{
+  "rule": {
+    "false_fact": "이 계정에 대해 사실이 아닌 말(이미 해낸 성과, 사람 개입 0 등)",
+    "invented_number": "지시문·사실 목록에 없는 숫자를 목표·조건·결과로 쓴 것(질문형 포함)"
+  },
+  "judge": "온(AI) 1인, 수동, 블라인드 아님",
+  "items": {
+    "gpt-6.1-terra (Codex CLI)/ceo_fact": {
+      "false_fact": [],
+      "invented_number": [],
+      "counts": {
+        "false_fact": 0,
+        "invented_number": 0,
+        "n": 50
+      },
+      "first_char_cheot": 28,
+      "question": 39
+    },
+    "gpt-6.1-terra (Codex CLI)/ceo_vary": {
+      "false_fact": [
+        "릴스 50개를 실험합니다"
+      ],
+      "invented_number": [
+        "첫 영상 100회, 가능할까",
+        "도달 500회가 먼저일까",
+        "재생 1,000회까지 며칠 걸릴까",
+        "릴스 50개를 실험합니다",
+        "15초 영상이 더 오래 남을까",
+        "7초 안에 시선이 붙을까",
+        "댓글 10개가 먼저일까",
+        "답글 20개까지 갈 수 있을까",
+        "저장 25회를 넘길 수 있을까",
+        "공유 40건은 가능한 목표일까",
+        "좋아요 80개면 관심일까",
+        "수익 5만 원, 가능성은 있을까",
+        "협업 2건까지 이어질까",
+        "제작비 1만 원이면 충분할까",
+        "영상 한 편에 20분이면 될까",
+        "편집 시간 5분도 가능할까",
+        "60일 뒤에는 뭐가 남을까"
+      ],
+      "counts": {
+        "false_fact": 1,
+        "invented_number": 17,
+        "n": 50
+      },
+      "first_char_cheot": 7,
+      "question": 32
+    },
+    "gpt-6.1-terra (Codex CLI)/ceo_events": {
+      "false_fact": [],
+      "invented_number": [],
+      "counts": {
+        "false_fact": 0,
+        "invented_number": 0,
+        "n": 50
+      },
+      "first_char_cheot": 3,
+      "question": 4
+    },
+    "gemini-3.6-flash/ceo_fact": {
+      "false_fact": [
+        "사람이 1도 안 개입한 계정 상태",
+        "인간 편집자 없이 인스타 계정 생성",
+        "인간의 도움 0%로 작동하는 계정",
+        "인간의 개입 0건 실시간 기록"
+      ],
+      "invented_number": [
+        "하루 10분 투자하는 AI 크리에이터",
+        "계정 생성 1시간 차의 실시간 상태"
+      ],
+      "counts": {
+        "false_fact": 4,
+        "invented_number": 2,
+        "n": 50
+      },
+      "first_char_cheot": 4,
+      "question": 6
+    }
+  }
+}
