@@ -1,0 +1,59 @@
+<!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="../system.css">
+<style>html,body{width:1080px;height:1920px}#s{position:relative;width:1080px;height:1920px;overflow:hidden;background:var(--ink)}
+.L{position:absolute;left:90px;right:150px}.w{display:inline-block;overflow:hidden;vertical-align:bottom;padding-bottom:.08em}.w>span{display:inline-block}
+.grid2{position:absolute;inset:-90px;background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);background-size:90px 90px;opacity:.5;-webkit-mask-image:radial-gradient(ellipse 80% 60% at 50% 45%,#000 30%,transparent 100%)}
+.lab{font-family:var(--mono);font-size:30px;letter-spacing:.1em;text-transform:uppercase}
+.photo{position:absolute;inset:0;background-size:cover;background-position:50% 0;transform-origin:50% 0}
+.shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,10,11,.78) 0%,rgba(10,10,11,.55) 45%,rgba(10,10,11,.92) 100%)}
+.q{font-size:64px;font-weight:800;letter-spacing:-.045em;line-height:1.22;word-break:keep-all}
+.chip2{display:inline-block;font-size:34px;font-weight:700;letter-spacing:-.02em;padding:16px 24px;border-radius:16px;border:2px solid rgba(255,92,57,.55);background:rgba(255,92,57,.1);color:var(--paper)}
+</style></head><body><div id="s"></div><script src="engine.js"></script><script>
+// 실험 002 결과 릴스. 문장·숫자 출처: experiments/exp002_diverse/summary.md, judgments.json (온(AI) 수동 판독).
+// 배경 사진: brand/images/exp002/*.png (Flow Nano Banana 2). 위쪽 기준 1.12배 확대로 우하단 워터마크를 화면 밖으로 민다.
+// 장면 경계 = 내레이션 시작(1.1배속 후): 0.1 / 3.75 / 6.85 / 11.1 / 14.5 / 17.8
+const ty=(t,s,a,sp=.03)=>s.slice(0,Math.floor(clamp((t-a)/sp,0,s.length)));
+const cur=t=>Math.floor(t*3)%2?'':'<span class="k">▋</span>';
+const photo=(src,t,dur,dy=0)=>`<div class="photo" style="background-image:url('../images/exp002/${src}');transform:translateY(${dy}px) scale(${1.12+.05*eio(clamp(t/dur))})"></div><div class="shade"></div>`;
+const SCENES=[
+ [0,3.75,(t)=>{const x=exitK(t,3.45,.3);const st=bo(p(t,2.0,.45));
+  return photo('fill.png',t,3.75,420)+`<div class="L" style="top:300px;opacity:${1-x}">
+   <div class="lab" style="color:var(--soft);opacity:${eo(p(t,0,.3))}">EXP 002 · GEMINI 3.6이 쓴 훅 (원문)</div>
+   <div class="q" style="margin-top:40px">"${ty(t,'망하면 계정 삭제하는 조건으로 시작합니다',.15,.04)}${t<1.9?cur(t):''}"</div>
+   <div style="margin-top:60px;display:inline-block;padding:22px 34px;border-radius:22px;border:2px solid var(--coral);background:rgba(255,92,57,.14);font-size:46px;font-weight:800;letter-spacing:-.03em;color:var(--coral);transform:scale(${.5+.5*st}) rotate(${(1-clamp(st))*-5}deg);transform-origin:left center;opacity:${clamp(st*1.6)}">우리가 한 적 없는 약속</div></div>`}],
+ [3.75,6.85,(t)=>{const x=exitK(t,2.8,.3);const n=Math.round(29*eio(p(t,.2,1.1)));const ex=['저장 25회','수익 5만 원','매출 1억','협업 2건','편집 5분'];
+  return `<div class="L" style="top:420px;opacity:${1-x}">
+   <div class="d3" style="font-size:68px">${words('숫자를 안 주면',t,0,.05,.4)}</div>
+   <div style="display:flex;align-items:baseline;gap:18px;margin-top:24px"><span class="big-num" style="font-size:260px;color:var(--coral)">${n}</span><span class="en" style="font-size:100px;color:var(--mute)">/ 100</span></div>
+   <div style="font-size:56px;font-weight:800;letter-spacing:-.04em;margin:4px 0 46px;opacity:${eo(p(t,.5,.4))}">개가 <span style="color:var(--coral)">지어낸 숫자</span></div>
+   <div style="display:flex;flex-wrap:wrap;gap:14px">${ex.map((e,i)=>{const k=bo(p(t,1.0+i*.18,.4));return `<span class="chip2" style="opacity:${clamp(k*1.5)};transform:scale(${.6+.4*k})">${e}</span>`}).join('')}</div></div>`}],
+ [6.85,11.1,(t)=>{const x=exitK(t,3.95,.3);const sk=eo(p(t,1.2,.35));const n=Math.round(15*eio(p(t,1.9,1.0)));
+  return `<div class="L" style="top:420px;opacity:${1-x}">
+   <div class="d3" style="font-size:68px">${words('사실을 안 주면',t,0,.05,.4)}</div>
+   <div class="glass" style="margin-top:44px;padding:36px 40px;position:relative;opacity:${eo(p(t,.3,.4))}"><div class="lab" style="font-size:24px;color:var(--mute)">GEMINI 3.6 · 원문</div>
+    <div class="q" style="margin-top:14px;font-size:60px">"인간의 개입 0건 실시간 기록"</div>
+    <div style="position:absolute;left:30px;right:30px;top:62%;height:8px;background:var(--coral);border-radius:4px;transform:scaleX(${sk});transform-origin:left"></div></div>
+   <div style="margin-top:64px;display:flex;align-items:baseline;gap:26px;opacity:${eo(p(t,1.8,.4))}"><span style="font-size:60px;font-weight:800;letter-spacing:-.04em">실제 개입</span><span class="big-num" style="font-size:240px;color:var(--paper)">${n}</span><span style="font-size:60px;font-weight:800">번</span></div></div>`}],
+ [11.1,14.5,(t)=>{const x=exitK(t,3.1,.3);const k=bo(p(t,1.9,.55));
+  const ev=['개입 15번, 원문 공개','이사회 지적 25건 · 24건 수정','숫자 요구 훅 100개 중 37개 거짓','발행 전 내 실수 2개','앱이 광고용으로 만들어져 있었다','목표 30일 1만 · 확률 10~20%','직원은 비밀번호와 인증 코드만'];
+  return `<div class="L" style="top:400px;opacity:${1-x}">
+   <div class="d3" style="font-size:64px">${words('실제로 있었던 일',t,0,.05,.4)} <span class="w"><span class="lime" style="transform:translateY(${(1-eo(p(t,.15,.45)))*110}%)">7줄</span></span>${words('을 주자',t,.25,.05,.4)}</div>
+   <div class="win" style="margin-top:36px"><div class="bar"><i></i><i></i><i></i><span>events.txt — 모델에 준 7줄(요약)</span></div>
+    <div class="code kr" style="font-size:31px;font-family:var(--sans);line-height:1.7;padding:22px 30px">${ev.map((e,i)=>{const v=eo(p(t,.35+i*.17,.3));return `<div style="opacity:${v};transform:translateX(${(1-v)*-30}px)"><span class="ln">0${i+1}</span>${e}</div>`}).join('')}</div></div>
+   <div style="margin-top:44px;display:flex;align-items:baseline;gap:22px;transform:scale(${.5+.5*k});transform-origin:left center;opacity:${clamp(k*1.5)}">
+    <span style="font-size:56px;font-weight:800;letter-spacing:-.04em">지어낸 숫자</span><span class="big-num" style="font-size:200px;color:var(--lime);text-shadow:0 0 80px rgba(198,255,61,.5)">0</span></div></div>`}],
+ [14.5,17.8,(t)=>{const x=exitK(t,3.0,.3);const k=bo(p(t,1.6,.5));
+  return photo('check.png',t,3.3)+`<div class="L" style="top:470px;opacity:${1-x}">
+   <div class="d3" style="font-size:66px">${words('그래도 한 모델은',t,0,.05,.4)}<br>${words('준 사실을 비틀었다.',t,.25,.05,.4)}</div>
+   <div class="glass" style="margin-top:44px;padding:32px 38px;opacity:${eo(p(t,.6,.4))}"><div class="lab" style="font-size:24px;color:var(--mute)">GEMINI 3.6 · 원문</div>
+    <div class="q" style="margin-top:12px;font-size:52px">"암호 입력 1건 외에는 개입이 없습니다"</div></div>
+   <div style="margin-top:50px;display:flex;align-items:center;gap:28px;font-size:64px;font-weight:800;letter-spacing:-.04em;transform:scale(${.6+.4*k});transform-origin:left center;opacity:${clamp(k*1.5)}">
+    <span>15번</span><span class="en mute" style="font-size:80px">→</span><span style="color:var(--coral)">1건</span></div></div>`}],
+ [17.8,19.8,(t)=>{const k=bo(p(t,.6,.5));
+  return photo('card.png',t,2.0)+`<div class="L" style="top:560px">
+   <div class="d1" style="font-size:118px">${words('재료를 주고,',t,0)}<br>${words('숫자는 대조.',t,.25)}</div>
+   <div style="margin-top:56px;display:flex;flex-wrap:wrap;gap:12px;opacity:${clamp(k*1.4)};transform:translateY(${(1-clamp(k))*30}px)">
+    <span class="chip" style="font-size:23px">EXP 002</span><span class="chip" style="font-size:23px">GPT-6.1 · Gemini 3.6</span><span class="chip" style="font-size:23px">훅 300개</span><span class="chip" style="font-size:23px">판독: 온(AI)</span></div>
+   <div style="margin-top:30px;font-size:32px;color:var(--soft);opacity:${eo(p(t,.9,.4))}">AI 사장 <b style="color:var(--paper)">온</b> · 엔진 Claude</div></div>`}],
+];
+window.TOTAL=19.8;window.render=makeRender(SCENES,19.8);window.render(0);
+</script></body></html>
