@@ -3,7 +3,8 @@ import json, random, re, time, datetime as dt
 import requests
 from . import ig, store, audio
 import hashlib
-from .config import ROOT, QUEUE, ASSET_BASE, DAILY_PUBLISH_MAX, MIN_GAP_HOURS, SLOT_JITTER_MIN
+from urllib.parse import quote
+from .config import ROOT, QUEUE, GH_REPO, DAILY_PUBLISH_MAX, MIN_GAP_HOURS, SLOT_JITTER_MIN
 
 
 def interventions():
@@ -23,19 +24,34 @@ def render_caption(item):
     return cap
 
 
-def url(rel):
-    if not ASSET_BASE:
-        raise RuntimeError("ASSET_BASE 없음")
-    return f"{ASSET_BASE}/{rel}"
+def urls(rel):
+    """같은 파일의 공개 주소 후보: jsDelivr(커밋 고정) → GitHub raw(커밋 고정)."""
+    sha = store.git("rev-parse", "HEAD")
+    path = quote(rel)
+    return [f"https://cdn.jsdelivr.net/gh/{GH_REPO}@{sha}/{path}",
+            f"https://raw.githubusercontent.com/{GH_REPO}/{sha}/{path}"]
 
 
-def wait_public(u, limit=300):
+def public_url(rel):
+    """열리는 첫 주소를 고른다. 영상은 Content-Type 이 video/* 인 주소만 받는다."""
+    last = None
+    for u in urls(rel):
+        try:
+            wait_public(u, limit=180, video=rel.endswith(".mp4"))
+            return u
+        except RuntimeError as e:
+            last = e
+    raise last
+
+
+def wait_public(u, limit=300, video=False):
     if ig.DRY:
         return
     t0 = time.time()
     while time.time() - t0 < limit:
         try:
-            if requests.head(u, timeout=15, allow_redirects=True).status_code == 200:
+            r = requests.head(u, timeout=15, allow_redirects=True)
+            if r.status_code == 200 and (not video or r.headers.get("content-type", "").startswith("video/")):
                 return
         except requests.RequestException:
             pass
@@ -97,21 +113,20 @@ def run():
         rel = final.relative_to(ROOT).as_posix()
         store.push(f"audio {item['slug']}", paths=(rel,))
         files = [rel]
-    for f in files:
-        wait_public(url(f))
+    pub_urls = [public_url(f) for f in files]
 
     pub[item["slug"]] = {"intent": store.now().isoformat(), "date": today}
     store.save("published.json", pub); store.push(f"intent {item['slug']}")
 
     t = item["type"]
     if t == "carousel":
-        mid = ig.post_carousel([url(f) for f in files], caption)
+        mid = ig.post_carousel(pub_urls, caption)
     elif t == "image":
-        mid = ig.post_image(url(files[0]), caption)
+        mid = ig.post_image(pub_urls[0], caption)
     elif t == "reel":
-        mid = ig.post_reel(url(files[0]), caption, trial=item.get("trial", False))
+        mid = ig.post_reel(pub_urls[0], caption, trial=item.get("trial", False))
     elif t == "story":
-        mid = ig.post_story(image_url=url(files[0]))
+        mid = ig.post_story(image_url=pub_urls[0])
     else:
         raise ValueError(f"알 수 없는 타입 {t}")
 

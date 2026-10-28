@@ -58,7 +58,7 @@ def _publish(cid):
 
 def _check_jpeg(url):
     # 인스타 API 이미지 발행은 JPEG 만 받는다(이사회 P0 #1). 확장자로 1차 차단.
-    if not url.lower().endswith((".jpg", ".jpeg")):
+    if not url.split("?")[0].lower().endswith((".jpg", ".jpeg")):
         raise IGError(f"JPEG 아님: {url}")
 
 

@@ -36,7 +36,9 @@ def write_env(key, value):
 
 load_env()
 SHORTS_ROOT = Path(os.environ.get("SHORTS_ROOT", r"D:\쇼츠"))
-ASSET_BASE = os.environ.get("ASSET_BASE", "").rstrip("/")   # https://raw.githubusercontent.com/<owner>/<repo>/main
+GH_REPO = os.environ.get("GH_REPO", "rsl20011975-arch/on-company")   # 공개 레포. 인스타가 여기서 파일을 가져간다
+# 발행 주소: jsDelivr(확장자에 맞는 Content-Type, mp4=video/mp4) + 커밋 고정. 안 열리면 GitHub raw 로 물러난다.
+# raw 는 mp4 를 application/octet-stream 으로 내준다(2026-10-28 실측) - 릴스에는 jsDelivr 가 1순위다.
 MUSIC_BANK = SHORTS_ROOT / "content" / "music_bank" / "on"
 VOICE_MODEL = os.environ.get("ON_VOICE_MODEL", "gemini-3.1-flash-live-preview")   # 하루 무제한(쇼츠공장 실측)
 VOICE_NAME = os.environ.get("ON_VOICE_NAME", "Orus")                              # 드림님이 귀로 고른 남성 목소리
