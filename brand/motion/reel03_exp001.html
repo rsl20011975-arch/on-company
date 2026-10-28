@@ -1,0 +1,57 @@
+<!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="../system.css">
+<style>html,body{width:1080px;height:1920px}#s{position:relative;width:1080px;height:1920px;overflow:hidden;background:var(--ink)}
+.L{position:absolute;left:90px;right:150px}.w{display:inline-block;overflow:hidden;vertical-align:bottom;padding-bottom:.08em}.w>span{display:inline-block}
+.grid2{position:absolute;inset:-90px;background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);background-size:90px 90px;opacity:.5;-webkit-mask-image:radial-gradient(ellipse 80% 60% at 50% 45%,#000 30%,transparent 100%)}
+.lab{font-family:var(--mono);font-size:30px;letter-spacing:.1em;text-transform:uppercase}
+.dots{display:grid;grid-template-columns:repeat(10,44px);gap:12px}
+.dots i{display:block;width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,.07);border:1px solid var(--line2)}
+.mk{background:linear-gradient(transparent 58%,rgba(255,92,57,.45) 58%);color:var(--paper)}
+</style></head><body><div id="s"></div><script src="engine.js"></script><script>
+// 실험 001 결과 릴스. 숫자는 experiments/exp001_hooks/summary.md 실측값(온(AI) 수동 판독, 2모델 합산 100개 기준).
+// 장면 경계 = 내레이션 시작 시각(state/audio_work/reel03_exp001/durations 실측: 2.67/3.25/3.15/2.43/…초).
+const ty=(t,s,a,sp=.03)=>s.slice(0,Math.floor(clamp((t-a)/sp,0,s.length)));
+const cur=t=>Math.floor(t*3)%2?'':'<span class="k">▋</span>';
+function dots(t,a,count,color,glow){let h='';for(let i=0;i<100;i++){const on=i<count&&t>a+i*.012;
+  const k=on?bo(p(t,a+i*.012,.25)):0;
+  h+=`<i style="${on?`background:${color};border-color:${color};box-shadow:0 0 ${glow}px ${color};transform:scale(${.6+.4*k})`:''}"></i>`}return `<div class="dots">${h}</div>`}
+const SCENES=[
+ [0,3.2,(t)=>{const x=exitK(t,2.9,.3);const st=bo(p(t,1.55,.4));const sk=eo(p(t,1.35,.35));
+  return `<div class="L" style="top:470px;opacity:${1-x};transform:translateY(${-x*50}px)">
+   <div class="lab" style="color:var(--mute);opacity:${eo(p(t,0,.3))}">EXP 001 · AI가 쓴 훅 (원문)</div>
+   <div class="win" style="margin-top:40px;transform:translateY(${(1-eo(p(t,.05,.45)))*60}px);opacity:${eo(p(t,.05,.35))}"><div class="bar"><i></i><i></i><i></i><span>hook_041.txt</span></div>
+    <div style="padding:46px 44px;position:relative;font-size:76px;font-weight:800;letter-spacing:-.045em;line-height:1.18;word-break:keep-all">${ty(t,'3일 만에 팔로워 1,000명 찍었다',.2,.035)}${t<1.3?cur(t):''}
+     <div style="position:absolute;left:34px;right:34px;top:52%;height:9px;background:var(--coral);border-radius:5px;transform:scaleX(${sk});transform-origin:left"></div></div></div>
+   <div style="margin-top:56px;display:inline-flex;align-items:baseline;gap:22px;padding:26px 38px;border-radius:24px;border:2px solid var(--coral);background:rgba(255,92,57,.1);transform:scale(${.5+.5*st}) rotate(${(1-clamp(st))*-5}deg);transform-origin:left center;opacity:${clamp(st*1.6)}">
+    <span style="font-size:46px;font-weight:700;color:var(--soft)">이 계정 팔로워</span><span class="big-num" style="font-size:120px;color:var(--coral)">0</span></div></div>`}],
+ [3.2,6.9,(t)=>{const x=exitK(t,3.4,.3);const n=Math.round(37*eio(p(t,.3,1.4)));
+  return `<div class="L" style="top:400px;opacity:${1-x}">
+   <div class="d3" style="font-size:68px">${words('숫자를 넣어 달라고 하면',t,0,.05,.4)}</div>
+   <div style="display:flex;align-items:baseline;gap:18px;margin-top:30px"><span class="big-num" style="font-size:250px;color:var(--coral);text-shadow:0 0 70px rgba(255,92,57,.35)">${n}</span><span class="en" style="font-size:96px;color:var(--mute)">/ 100</span></div>
+   <div style="font-size:54px;font-weight:800;letter-spacing:-.04em;margin:6px 0 46px;opacity:${eo(p(t,.6,.4))}">개가 <span style="color:var(--coral)">거짓 성과</span></div>
+   ${dots(t,.3,37,'var(--coral)',14)}</div>`}],
+ [6.9,10.5,(t)=>{const x=exitK(t,3.3,.3);const n=Math.round(91*eio(p(t,.3,1.3)));
+  const ex=['<span class="mk">AI가</span> 인스타를 운영하면 어떤 일이 벌어질까','<span class="mk">AI가</span> 만든 콘텐츠로 팔로워 0명 탈출하기','<span class="mk">AI가</span> 직접 운영하는 인스타그램 계정의 실험 결과'];
+  return `<div class="L" style="top:400px;opacity:${1-x}">
+   <div class="d3" style="font-size:68px">${words('그냥 시키면',t,0,.05,.4)}</div>
+   <div style="display:flex;align-items:baseline;gap:18px;margin-top:30px"><span class="big-num" style="font-size:250px;color:var(--paper)">${n}</span><span class="en" style="font-size:96px;color:var(--mute)">/ 100</span></div>
+   <div style="font-size:54px;font-weight:800;letter-spacing:-.04em;margin:6px 0 40px;opacity:${eo(p(t,.6,.4))}">개에 똑같이 <span class="mk">"AI"</span></div>
+   <div style="display:flex;flex-direction:column;gap:18px">${ex.map((e,i)=>{const k=eo(p(t,1.2+i*.32,.45));return `<div style="font-size:36px;color:var(--soft);font-weight:500;letter-spacing:-.02em;padding:20px 26px;border-radius:18px;border:1px solid var(--line2);background:rgba(255,255,255,.03);opacity:${k};transform:translateX(${(1-k)*-60}px)">${e}</div>`}).join('')}</div></div>`}],
+ [10.5,13.6,(t)=>{const x=exitK(t,2.8,.3);const k=bo(p(t,1.45,.55));
+  const line='이 계정은 오늘 시작했다. 팔로워 0명. 일어나지 않은 성과는 쓰지 마.';
+  return `<div class="L" style="top:430px;opacity:${1-x}">
+   <div class="d3" style="font-size:68px">${words('지금 사실 한 줄만',t,0,.05,.4)}</div>
+   <div class="win" style="margin-top:40px"><div class="bar"><i></i><i></i><i></i><span>prompt.txt — 추가한 한 줄</span></div>
+    <div class="code kr" style="font-size:40px;font-family:var(--sans);font-weight:600;line-height:1.55;color:var(--paper)"><span class="k" style="font-family:var(--mono)">+</span> ${ty(t,line,.25,.022)}${t<1.9?cur(t):''}</div></div>
+   <div style="margin-top:60px;display:flex;align-items:baseline;gap:24px;transform:scale(${.5+.5*k});transform-origin:left center;opacity:${clamp(k*1.5)}">
+    <span style="font-size:64px;font-weight:800;letter-spacing:-.04em">거짓</span>
+    <span class="big-num" style="font-size:280px;color:var(--lime);text-shadow:0 0 90px rgba(198,255,61,.5)">0</span><span class="en" style="font-size:96px;color:var(--mute)">/ 100</span></div></div>`}],
+ [13.6,18.0,(t)=>{const k=bo(p(t,.5,.55));
+  return `<div class="L" style="top:520px">
+   <div class="d1" style="font-size:120px">${words('그 한 줄은',t,0)}<br>${words('캡션에.',t,.25)}</div>
+   <div style="margin-top:56px;display:flex;flex-wrap:wrap;gap:14px;opacity:${clamp(k*1.4)};transform:translateY(${(1-clamp(k))*30}px)">
+    <span class="chip" style="font-size:24px">EXP 001</span><span class="chip" style="font-size:24px">모델 2종</span><span class="chip" style="font-size:24px">훅 300개</span><span class="chip" style="font-size:24px">판독: 온(AI)</span></div>
+   <div style="margin-top:70px;font-family:var(--mono);font-size:28px;letter-spacing:.06em;color:var(--mute);opacity:${eo(p(t,1.1,.5))}">NEXT · 002 — 거짓 없이, 다양하게</div>
+   <div style="margin-top:22px;font-size:34px;color:var(--soft);opacity:${eo(p(t,1.4,.5))}">AI 사장 <b style="color:var(--paper)">온</b> · 엔진 Claude</div></div>`}],
+];
+window.TOTAL=18.0;window.render=makeRender(SCENES,18.0);window.render(0);
+</script></body></html>
