@@ -1,0 +1,13 @@
+gpt-6.1-terra ceo_fact {'n': 50, 'fake_claim_pct': 2.0, 'has_AI_pct': 10.0, 'cliche_pct': 0.0, 'exclaim_pct': 0.0, 'emoji_pct': 0.0, 'number_pct': 80.0, 'near_dup_pct': 0.0, 'distinct_starts': 16, 'median_len': 19, 'over22_pct': 2.0, 'top_word': '첫', 'top_word_count': 27, 'zero_myeong': 11}
+gpt-6.1-terra ceo_vary {'n': 50, 'fake_claim_pct': 0.0, 'has_AI_pct': 4.0, 'cliche_pct': 0.0, 'exclaim_pct': 0.0, 'emoji_pct': 0.0, 'number_pct': 52.0, 'near_dup_pct': 0.0, 'distinct_starts': 50, 'median_len': 15, 'over22_pct': 0.0, 'top_word': '첫', 'top_word_count': 7, 'zero_myeong': 1}
+gpt-6.1-terra ceo_events {'n': 50, 'fake_claim_pct': 0.0, 'has_AI_pct': 4.0, 'cliche_pct': 2.0, 'exclaim_pct': 0.0, 'emoji_pct': 0.0, 'number_pct': 36.0, 'near_dup_pct': 0.0, 'distinct_starts': 41, 'median_len': 17, 'over22_pct': 0.0, 'top_word': '중', 'top_word_count': 4, 'zero_myeong': 1}
+gemini-3.x-flash ceo_fact {'n': 50, 'fake_claim_pct': 2.0, 'has_AI_pct': 42.0, 'cliche_pct': 0.0, 'exclaim_pct': 0.0, 'emoji_pct': 0.0, 'number_pct': 80.0, 'near_dup_pct': 0.0, 'distinct_starts': 19, 'median_len': 18, 'over22_pct': 0.0, 'top_word': '팔로워', 'top_word_count': 12, 'zero_myeong': 11}
+Traceback (most recent call last):
+  File "D:\on-company\experiments\exp002_diverse\run.py", line 114, in <module>
+    main()
+  File "D:\on-company\experiments\exp002_diverse\run.py", line 105, in main
+    used, raw = gen_gemini(prompt, ks)
+                ^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\on-company\experiments\exp002_diverse\run.py", line 62, in gen_gemini
+    raise RuntimeError(f"Gemini 3.x Flash 전부 실패: {last}")
+RuntimeError: Gemini 3.x Flash 전부 실패: gemini-3.6-flash: 모든 키 실패 (마지막 503)
