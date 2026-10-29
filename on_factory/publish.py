@@ -1,7 +1,7 @@
 """큐에서 오늘 낼 것 1건을 발행한다. 멱등: 의도를 먼저 기록하고, 결과가 불명이면 실제 피드와 대조한다."""
 import json, random, re, time, datetime as dt
 import requests
-from . import ig, store, audio
+from . import ig, store, audio, announce
 import hashlib
 from urllib.parse import quote
 from .config import ROOT, QUEUE, GH_REPO, DAILY_PUBLISH_MAX, MIN_GAP_HOURS, SLOT_JITTER_MIN
@@ -105,6 +105,7 @@ def run():
         if found:
             pub[item["slug"]] = {**prev, "media_id": found, "date": today, "recovered": True}
             store.save("published.json", pub); store.push(f"recovered {item['slug']}")
+            announce.published("인스타", item["slug"], found, "끊긴 발행을 피드에서 찾아 복구")
             return found
 
     files = item["files"]
@@ -134,4 +135,5 @@ def run():
                              published_at=store.now().isoformat())
     store.save("published.json", pub)
     store.push(f"published {item['slug']} {mid}")
+    announce.published("인스타", item["slug"], mid, {"carousel": "카드", "reel": "릴스"}.get(t, t))
     return mid
