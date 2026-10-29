@@ -1,17 +1,17 @@
 {
   "reel03_exp001": {
-    "at": "2026-10-29T19:18:42.982027+09:00",
+    "at": "2026-10-30T07:30:14.879088+09:00",
     "kind": "REELS",
     "latest": {
-      "views": 31,
-      "reach": 29,
+      "views": 121,
+      "reach": 103,
       "saved": 0,
       "shares": 0,
       "likes": 0,
       "comments": 0,
       "total_interactions": 0,
-      "ig_reels_avg_watch_time": 15313,
-      "ig_reels_video_view_total_time": 490018
+      "ig_reels_avg_watch_time": 10353,
+      "ig_reels_video_view_total_time": 1128568
     },
     "errors": {},
     "history": [
@@ -27,6 +27,50 @@
         "total_interactions": 0,
         "ig_reels_avg_watch_time": 15313,
         "ig_reels_video_view_total_time": 490018
+      },
+      {
+        "at": "2026-10-30T07:30:14.879088+09:00",
+        "age_days": 0,
+        "views": 121,
+        "reach": 103,
+        "saved": 0,
+        "shares": 0,
+        "likes": 0,
+        "comments": 0,
+        "total_interactions": 0,
+        "ig_reels_avg_watch_time": 10353,
+        "ig_reels_video_view_total_time": 1128568
+      }
+    ]
+  },
+  "post04_exp001": {
+    "at": "2026-10-30T07:30:14.879088+09:00",
+    "kind": "CAROUSEL_ALBUM",
+    "latest": {
+      "views": 0,
+      "reach": 0,
+      "saved": 0,
+      "shares": 0,
+      "likes": 0,
+      "comments": 0,
+      "total_interactions": 0,
+      "follows": 0,
+      "profile_visits": 0
+    },
+    "errors": {},
+    "history": [
+      {
+        "at": "2026-10-30T07:30:14.879088+09:00",
+        "age_days": 0,
+        "views": 0,
+        "reach": 0,
+        "saved": 0,
+        "shares": 0,
+        "likes": 0,
+        "comments": 0,
+        "total_interactions": 0,
+        "follows": 0,
+        "profile_visits": 0
       }
     ]
   }
