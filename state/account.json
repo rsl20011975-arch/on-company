@@ -1,0 +1,62 @@
+{
+  "days": [
+    {
+      "date": "2026-10-29",
+      "followers": 0,
+      "media": 1
+    }
+  ],
+  "raw": {
+    "reach": [
+      {
+        "name": "reach",
+        "period": "day",
+        "title": "도달한 계정",
+        "description": "광고를 포함하여 회원님의 콘텐츠를 1회 이상 조회한 고유 계정 수. 콘텐츠에는 게시물, 스토리, 릴스, 동영상 및 라이브 방송이 포함됩니다. 도달은 같은 계정에서 콘텐츠를 여러 번 본 횟수까지 집계하는 노출과는 다른 개념입니다. 이 지표는 추산치이며 개발 중입니다.",
+        "total_value": {
+          "value": 29,
+          "breakdowns": [
+            {
+              "dimension_keys": [
+                "follow_type"
+              ],
+              "results": [
+                {
+                  "dimension_values": [
+                    "NON_FOLLOWER"
+                  ],
+                  "value": 29
+                }
+              ]
+            }
+          ]
+        },
+        "id": "17841416466936492/insights/reach/day"
+      }
+    ],
+    "views": [
+      {
+        "name": "views",
+        "period": "day",
+        "title": "조회수",
+        "description": "콘텐츠가 재생되거나 표시된 횟수. 콘텐츠에는 릴스, 게시물, 스토리가 포함됩니다.",
+        "total_value": {
+          "value": 31
+        },
+        "id": "17841416466936492/insights/views/day"
+      }
+    ],
+    "profile_links_taps": [
+      {
+        "name": "profile_links_taps",
+        "period": "day",
+        "title": "프로필 링크 누름",
+        "description": "사업장 주소, 통화 버튼, 이메일 버튼 및 텍스트 버튼을 누른 횟수.",
+        "total_value": {
+          "value": 0
+        },
+        "id": "17841416466936492/insights/profile_links_taps/day"
+      }
+    ]
+  }
+}

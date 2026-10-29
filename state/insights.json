@@ -1,0 +1,33 @@
+{
+  "reel03_exp001": {
+    "at": "2026-10-29T19:18:42.982027+09:00",
+    "kind": "REELS",
+    "latest": {
+      "views": 31,
+      "reach": 29,
+      "saved": 0,
+      "shares": 0,
+      "likes": 0,
+      "comments": 0,
+      "total_interactions": 0,
+      "ig_reels_avg_watch_time": 15313,
+      "ig_reels_video_view_total_time": 490018
+    },
+    "errors": {},
+    "history": [
+      {
+        "at": "2026-10-29T19:18:42.982027+09:00",
+        "age_days": 0,
+        "views": 31,
+        "reach": 29,
+        "saved": 0,
+        "shares": 0,
+        "likes": 0,
+        "comments": 0,
+        "total_interactions": 0,
+        "ig_reels_avg_watch_time": 15313,
+        "ig_reels_video_view_total_time": 490018
+      }
+    ]
+  }
+}
