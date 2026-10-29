@@ -1,0 +1,21 @@
+/* 네이티브 릴스 틀 (실험 003 B안 문법, 2026-10-30). 광고 신호 0: 브랜드 머리띠·마스코트·모션 템플릿·로고 엔딩 없음.
+   화면 = 실제 출력 파일을 폰 메모처럼 + 손 표시(형광펜·펜) + 쇼츠 자막. 쓰는 법은 native.js 머리말. */
+html,body{width:1080px;height:1920px}#s{position:relative;width:1080px;height:1920px;overflow:hidden}
+:root{--bg:#F7F6F2;--tx:#17171A;--ln:#A9A7A0;--hd:#6E6C66;--hl:rgba(255,222,40,.62)}
+/* 화면 구역: 라벨 130~240 · 메모 머리 300~420 · 행 450~1170(80px×9) · 자막 1210~ · 1500 아래는 인스타 UI 자리 */
+.memo{position:absolute;inset:0;background:var(--bg);transform-origin:50% 38%}
+.mh{position:absolute;top:300px;left:80px;right:80px;font:500 30px/1.3 var(--sans);color:var(--hd);letter-spacing:-.01em}
+.mh b{display:block;font-size:52px;font-weight:800;color:var(--tx);letter-spacing:-.03em;margin-top:10px}
+.rows{position:absolute;left:80px;right:110px;top:450px}
+.r{position:relative;display:flex;gap:26px;font:500 44px/1.0 var(--sans);color:var(--tx);letter-spacing:-.025em;height:80px;align-items:center;white-space:nowrap}
+.r i{font-style:normal;width:56px;text-align:right;color:var(--ln);font-size:30px;flex:none}
+.r span{position:relative;z-index:0;display:inline-block;width:max-content}  /* z-index:0 = 형광펜(z-index:-1)이 메모 배경 뒤로 숨지 않게 (2026-10-30 자기 검수에서 발견) */
+.hl{position:absolute;left:-10px;right:-10px;top:10%;height:84%;background:var(--hl);border-radius:6px 14px 8px 12px;transform-origin:left;z-index:-1}
+.strike{position:absolute;left:-6px;right:-6px;top:52%;height:7px;background:#E5352B;border-radius:4px;transform-origin:left}
+.lab{position:absolute;top:130px;left:0;right:0;text-align:center;z-index:6}
+.lab span{display:inline-block;background:#fff;color:#111;font:800 50px/1.25 var(--sans);letter-spacing:-.035em;padding:18px 30px;border-radius:20px;box-shadow:0 10px 40px rgba(0,0,0,.18)}
+.sub{position:absolute;top:1220px;left:70px;right:70px;text-align:center;z-index:7;font:900 64px/1.3 var(--sans);letter-spacing:-.02em;word-spacing:.08em;color:#fff;
+  -webkit-text-stroke:7px #000;paint-order:stroke fill;text-shadow:0 6px 24px rgba(0,0,0,.45);word-break:keep-all}
+.sub em{font-style:normal;color:#FFE14D}
+.note{position:absolute;font:700 40px/1.2 var(--sans);color:#E5352B;letter-spacing:-.03em;transform:rotate(-3deg)}
+.memo.sm .r{font-size:38px;letter-spacing:-.03em}   /* 27자까지 한 줄 */
