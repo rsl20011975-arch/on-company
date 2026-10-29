@@ -89,7 +89,7 @@ def run():
     if last and now - last < dt.timedelta(hours=MIN_GAP_HOURS):
         print(f"직전 발행 후 {MIN_GAP_HOURS}시간이 안 지났다"); return None
     queue = json.loads(QUEUE.read_text(encoding="utf-8"))
-    due = [q for q in queue if not pub.get(q["slug"], {}).get("media_id") and due_at(q, dday) <= now]
+    due = [q for q in queue if not pub.get(q["slug"], {}).get("media_id") and not q.get("hold") and due_at(q, dday) <= now]  # hold = 사장이 세워 둔 것
     if not due:
         print("지금 낼 것이 없다"); return None
     item = sorted(due, key=lambda q: due_at(q, dday))[0]
