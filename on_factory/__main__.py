@@ -1,11 +1,11 @@
 """python -m on_factory <작업>
-  daily     : pull → 토큰 → 발행 1건(무작위 지연) → 댓글 모으기 → 생존 신호
+  daily     : pull → 토큰 → 발행 1건(무작위 지연) → Threads 1건 → 댓글 모으기 → 생존 신호
   collect   : 성과 수집
   comments  : 댓글 모으기 + 사장이 쓴 답 게시
   check     : 연결 점검 (계정·한도·토큰·공개 URL) - 발행하지 않는다
 """
 import json, sys, traceback, datetime as dt
-from . import store, publish, collect, comments, tokens, ig
+from . import store, publish, threads_publish, collect, comments, tokens, ig
 from .notify import send
 from .config import QUEUE
 
@@ -34,7 +34,7 @@ def watchdog():
 
 
 def main(task):
-    steps = {"daily": [store.pull, tokens.run, publish.run, comments.fetch, watchdog],
+    steps = {"daily": [store.pull, tokens.run, publish.run, threads_publish.run, comments.fetch, watchdog],
              "collect": [store.pull, collect.run],
              "comments": [store.pull, comments.fetch, comments.post],
              "check": [store.pull, lambda: print(json.dumps({"me": ig.me(), "limit": ig.publishing_limit()}, ensure_ascii=False))]}[task]
