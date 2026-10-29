@@ -15,8 +15,8 @@
     "note": "RuntimeError: git pull --rebase --autostash origin main 실패: From https://github.com/rsl20011975-arch/on-company\n * branch            main       -> FETCH_HEAD\nfatal: Cannot rebase onto multiple branches."
   },
   "comments": {
-    "at": "2026-10-29T13:00:06.108285+09:00",
-    "ok": false,
-    "note": "RuntimeError: git pull --rebase --autostash origin main 실패: From https://github.com/rsl20011975-arch/on-company\n * branch            main       -> FETCH_HEAD\nfatal: Cannot rebase onto multiple branches."
+    "at": "2026-10-29T14:00:17.551996+09:00",
+    "ok": true,
+    "note": ""
   }
 }
