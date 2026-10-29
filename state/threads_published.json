@@ -19,5 +19,8 @@
     ],
     "at": "2026-10-29T18:30:46.572536+09:00",
     "source": "experiments/exp001_hooks/summary.md"
+  },
+  "th007_interventions_d0": {
+    "intent": "2026-10-29T22:30:04.073256+09:00"
   }
 }
