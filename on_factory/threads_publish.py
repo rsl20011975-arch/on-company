@@ -1,11 +1,12 @@
 """bot/threads_queue.json 에서 때가 된 Threads 글 1건을 올린다. publish.py 의 Threads 판.
 
-항목: {"slug", "day", "slot", "parts": [본글, 답글...]}  (각 단락 500자 이하, 사장실이 쓴다)
+항목: {"slug", "day", "slot", "parts": [본글, 답글...], "video": 레포 경로 | "images": [레포 경로...]}
+  (각 단락 500자 이하, 매체는 본글에 붙는다. 사장실이 쓴다)
 멱등: 올리기 전에 의도를 기록한다. 의도만 있고 결과가 없으면 다시 올리지 않고 멈춘다(중복 게시보다 멈춤이 낫다).
 """
 import json, datetime as dt
 from . import store, threads
-from .publish import due_at, interventions
+from .publish import due_at, interventions, public_url
 from .config import ROOT
 
 QUEUE = ROOT / "bot" / "threads_queue.json"
@@ -35,9 +36,12 @@ def run():
         if len(p) > threads.MAX_TEXT:
             raise ValueError(f"{item['slug']}: 단락 {len(p)}자 (상한 {threads.MAX_TEXT})")
 
+    video = public_url(item["video"]) if item.get("video") else None
+    images = [public_url(f) for f in item.get("images", [])] or None
+
     pub[item["slug"]] = {"intent": now.isoformat()}
     store.save(STATE, pub); store.push(f"threads intent {item['slug']}")
-    ids = threads.post_thread(parts)
+    ids = threads.post_thread(parts, video_url=video, image_urls=images)
     pub[item["slug"]] = {"ids": ids, "at": store.now().isoformat(), "source": item.get("source", "")}
     store.save(STATE, pub); store.push(f"threads published {item['slug']}")
     return ids
