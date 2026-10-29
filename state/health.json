@@ -5,9 +5,9 @@
     "note": ""
   },
   "daily": {
-    "at": "2026-10-29T13:00:06.085286+09:00",
-    "ok": false,
-    "note": "RuntimeError: git pull --rebase --autostash origin main 실패: From https://github.com/rsl20011975-arch/on-company\n * branch            main       -> FETCH_HEAD\nfatal: Cannot rebase onto multiple branches."
+    "at": "2026-10-29T13:30:06.111876+09:00",
+    "ok": true,
+    "note": ""
   },
   "collect": {
     "at": "2026-10-29T13:00:06.028379+09:00",
