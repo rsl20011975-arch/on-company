@@ -21,6 +21,12 @@
     "source": "experiments/exp001_hooks/summary.md"
   },
   "th007_interventions_d0": {
-    "intent": "2026-10-29T22:30:04.073256+09:00"
+    "ids": [
+      "18115275818015724",
+      "18115892695846185",
+      "18187079767424516"
+    ],
+    "at": "2026-10-29T22:30:42.796605+09:00",
+    "source": "intervention_log.md"
   }
 }
