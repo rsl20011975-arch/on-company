@@ -5,7 +5,7 @@
   check     : 연결 점검 (계정·한도·토큰·공개 URL) - 발행하지 않는다
 """
 import json, sys, traceback, datetime as dt
-from . import store, publish, threads_publish, collect, comments, tokens, ig
+from . import store, repo_lock, publish, threads_publish, collect, comments, tokens, ig
 from .notify import send
 from .config import QUEUE
 
@@ -38,6 +38,16 @@ def main(task):
              "collect": [store.pull, collect.run],
              "comments": [store.pull, comments.fetch, comments.post],
              "check": [store.pull, lambda: print(json.dumps({"me": ig.me(), "limit": ig.publishing_limit()}, ensure_ascii=False))]}[task]
+    try:
+        with repo_lock.held(task):          # 세 작업이 같은 작업 폴더를 쓴다 - 한 번에 하나만
+            _run(task, steps)
+    except repo_lock.Busy as e:
+        print(e)
+        send(f"{task} 건너뜀 - {e}")
+        sys.exit(1)
+
+
+def _run(task, steps):
     try:
         for s in steps:
             s()
