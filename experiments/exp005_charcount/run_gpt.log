@@ -1,0 +1,12 @@
+gpt_plain 1 gpt-6.1-terra 250
+gpt_plain 2 gpt-6.1-terra 320
+gpt_plain 3 gpt-6.1-terra 266
+gpt_plain 4 gpt-6.1-terra 244
+gpt_plain 5 gpt-6.1-terra 318
+gpt_check 1 gpt-6.1-terra 462
+gpt_check 2 gpt-6.1-terra 497
+gpt_check 3 gpt-6.1-terra 480
+gpt_check 4 gpt-6.1-terra 496
+gpt_check 5 gpt-6.1-terra 497
+gpt_plain [250, 320, 266, 244, 318] 초과 0 450~500 0
+gpt_check [462, 497, 480, 496, 497] 초과 0 450~500 5
