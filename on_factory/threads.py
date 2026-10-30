@@ -24,7 +24,10 @@ def req(method, path, **params):
     if DRY:
         print(f"[DRY threads] {method} {path} {json.dumps({k: v for k, v in params.items() if k != 'access_token'}, ensure_ascii=False)[:240]}")
         return {"id": f"dry_{int(time.time()*1000)}", "status": "FINISHED", "data": []}
-    r = requests.request(method, f"{API}/{path}", params=params, timeout=90)
+    try:
+        r = requests.request(method, f"{API}/{path}", params=params, timeout=90)
+    except requests.RequestException as e:   # 오류 문구에 토큰 붙은 URL 이 실린다 - 그대로 올리지 않는다
+        raise IGError(f"Threads 연결 실패 {type(e).__name__} ({method} {path})") from None
     try:
         j = r.json()
     except ValueError:

@@ -7,6 +7,7 @@
 import json, sys, traceback, datetime as dt
 from . import store, repo_lock, publish, threads_publish, collect, comments, tokens, ig, brief
 from .notify import send
+from .redact import redact
 from .config import QUEUE
 
 sys.stdout.reconfigure(encoding="utf-8", line_buffering=True)
@@ -62,7 +63,7 @@ def _run(task, steps):
             s()
         heartbeat(task, True)
     except Exception as e:
-        note = f"{type(e).__name__}: {e}"
+        note = redact(f"{type(e).__name__}: {e}")
         traceback.print_exc()
         send(f"{task} 실패 - {note}")
         try:

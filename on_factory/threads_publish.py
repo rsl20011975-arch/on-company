@@ -39,6 +39,7 @@ def run():
     video = public_url(item["video"]) if item.get("video") else None
     images = [public_url(f) for f in item.get("images", [])] or None
 
+    threads.me()   # 연결 확인을 의도 기록 앞에 둔다 - 08:57 사고처럼 첫 요청에서 끊겨도 막힘이 남지 않게
     pub[item["slug"]] = {"intent": now.isoformat()}
     store.save(STATE, pub); store.push(f"threads intent {item['slug']}")
     ids = threads.post_thread(parts, video_url=video, image_urls=images)
