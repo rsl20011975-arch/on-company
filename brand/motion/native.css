@@ -1,6 +1,6 @@
 /* 네이티브 릴스 틀 (실험 003 B안 문법, 2026-10-30). 광고 신호 0: 브랜드 머리띠·마스코트·모션 템플릿·로고 엔딩 없음.
    화면 = 실제 출력 파일을 폰 메모처럼 + 손 표시(형광펜·펜) + 쇼츠 자막. 쓰는 법은 native.js 머리말. */
-html,body{width:1080px;height:1920px}#s{position:relative;width:1080px;height:1920px;overflow:hidden}
+html,body{width:1080px;height:1920px}#s{position:relative;width:1080px;height:1920px;overflow:hidden;background:var(--bg)}  /* 메모가 위로 흐를 때 아래 검은 띠가 보이던 결함(2026-10-30 10시 자기 검수) */
 :root{--bg:#F7F6F2;--tx:#17171A;--ln:#A9A7A0;--hd:#6E6C66;--hl:rgba(255,222,40,.62)}
 /* 화면 구역: 라벨 130~240 · 메모 머리 300~420 · 행 450~1170(80px×9) · 자막 1210~ · 1500 아래는 인스타 UI 자리 */
 .memo{position:absolute;inset:0;background:var(--bg);transform-origin:50% 38%}
