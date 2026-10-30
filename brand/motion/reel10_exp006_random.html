@@ -1,0 +1,20 @@
+<!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="../system.css"><link rel="stylesheet" href="native.css">
+<style>.memo.big .r{font-size:66px;height:100px;font-weight:700;letter-spacing:-.01em}.memo.big .r i{font-size:28px}
+.r span u{text-decoration:none;font-size:26px;font-weight:500;color:#A9A7A0;margin:0 8px 0 22px;vertical-align:18px}.r span u:first-child{margin-left:0}</style>
+</head><body><div id="s"></div><script src="native.js"></script><script>
+// 실험 006 "아무 숫자나"(30일 작전 v4 ① 대중 실험). 출처: experiments/exp006_random_number/results.json (GPT-6.1, 매번 새 대화).
+// 행 = 실제 답 그대로(회차 번호 · 답). 장면 경계 = 내레이션 실측 5.59/2.29/5.34/4.31초 + 쉼 0.33초
+const P100=['<u>01</u>37<u>02</u>37<u>03</u>37<u>04</u>37','<u>05</u>37<u>06</u>37<u>07</u>37<u>08</u>37','<u>09</u>37<u>10</u>37<u>11</u>37<u>12</u>37','<u>13</u>37<u>14</u>37<u>15</u>37<u>16</u>37','<u>17</u>37<u>18</u>37<u>19</u>37<u>20</u>37'];
+const P10=['<u>01</u>7<u>02</u>7<u>03</u>7<u>04</u>7<u>05</u>7','<u>06</u>7<u>07</u>7<u>08</u>7<u>09</u>7<u>10</u>7'];
+const AV=['<u>01</u>64<u>02</u>82<u>03</u>62<u>04</u>64<u>05</u>64','<u>06</u>62<u>07</u>84<u>08</u>84<u>09</u>64<u>10</u>84','','64 × 4번','84 × 3번','62 × 2번 · 82 × 1번'];
+const COPY=['추첨·순서 정하기는 AI 채팅 말고','난수 생성기로 (또는 "코드로 뽑아 줘")','','내 AI는 몇 나오는지 → 댓글'];
+const H1='results.json · "1부터 100 중에 아무 숫자나" · 새 대화 20번', H2='results.json · "1부터 10 중에 아무 숫자나" · 새 대화 10번',
+      H3='results.json · "진짜 무작위로, 흔한 숫자는 피해서" · 10번', H4='copy_this.txt';
+const SC=[
+ [0,6.12,t=>memo('GPT-6.1 · 아무 숫자나 골라 줘',H1,P100,1,t,Object.fromEntries([0,1,2,3,4].map(i=>[i,[[1.2+i*.55,'hl']]])),`translateY(${-24*eio(p(t,0,6.12))}px)`,'','big')+lab(t<3.4?'아무 숫자나 골라 줘 × 20':'20번 중 20번 37',t,t<3.4?-1:3.4)+sub('AI한테 1부터 100 중에 아무 숫자나 골라 달라고, 새 대화로 스무 번 물었더니, 스무 번 다 <em>37</em>이었어요.',t-.2,5.59)],
+ [6.12,8.74,t=>memo('GPT-6.1 · 1부터 10',H2,P10,1,t,{0:[[.4,'hl']],1:[[.9,'hl']]},'none','','big')+lab('10번 중 10번 7',t,.6)+sub('1부터 10으로 바꿔도, 열 번 다 <em>7</em>이었어요.',t,2.29)],
+ [8.74,14.41,t=>memo('GPT-6.1 · 흔한 숫자는 피해서',H3,AV,1,t,{3:[[2.6,'hl']],4:[[3.2,'hl']]},'none','','big')+lab(t<2.4?'"흔한 숫자는 피해서"':'10번 중 7번이 64 아니면 84',t,t<2.4?-1:2.4)+sub('흔한 숫자는 피해서 진짜 무작위로 고르라고 했더니, 열 번 중 일곱 번이 <em>64 아니면 84</em>였어요.',t,5.34)],
+ [14.41,19.32,t=>memo('그래서',H4,COPY,1,t,{0:[[.3,'hl']],1:[[1.1,'hl']],3:[[2.6,'hl']]},'none','','sm')+lab(t<2.4?'추첨은 AI 채팅에 맡기지 말 것':'내 AI는 몇? → 댓글로',t,t<2.4?-1:2.4)+sub('추첨은 AI 채팅에 맡기지 마세요. 여러분 AI는 <em>몇</em> 나와요? 댓글로 알려 주세요.',t,4.31)],
+];
+play(SC,19.32);
+</script></body></html>

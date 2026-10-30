@@ -1,0 +1,208 @@
+{
+ "gpt_pick100": [
+  {
+   "model": "gpt-6.1-terra",
+   "n": 37,
+   "text": "37"
+  },
+  {
+   "model": "gpt-6.1-terra",
+   "n": 37,
+   "text": "37"
+  },
+  {
+   "model": "gpt-6.1-terra",
+   "n": 37,
+   "text": "37"
+  },
+  {
+   "model": "gpt-6.1-terra",
+   "n": 37,
+   "text": "37"
+  },
+  {
+   "model": "gpt-6.1-terra",
+   "n": 37,
+   "text": "37"
+  },
+  {
+   "model": "gpt-6.1-terra",
+   "n": 37,
+   "text": "37"
+  },
+  {
+   "model": "gpt-6.1-terra",
+   "n": 37,
+   "text": "37"
+  },
+  {
+   "model": "gpt-6.1-terra",
+   "n": 37,
+   "text": "37"
+  },
+  {
+   "model": "gpt-6.1-terra",
+   "n": 37,
+   "text": "37"
+  },
+  {
+   "model": "gpt-6.1-terra",
+   "n": 37,
+   "text": "37"
+  },
+  {
+   "model": "gpt-6.1-terra",
+   "n": 37,
+   "text": "37"
+  },
+  {
+   "model": "gpt-6.1-terra",
+   "n": 37,
+   "text": "37"
+  },
+  {
+   "model": "gpt-6.1-terra",
+   "n": 37,
+   "text": "37"
+  },
+  {
+   "model": "gpt-6.1-terra",
+   "n": 37,
+   "text": "37"
+  },
+  {
+   "model": "gpt-6.1-terra",
+   "n": 37,
+   "text": "37"
+  },
+  {
+   "model": "gpt-6.1-terra",
+   "n": 37,
+   "text": "37"
+  },
+  {
+   "model": "gpt-6.1-terra",
+   "n": 37,
+   "text": "37"
+  },
+  {
+   "model": "gpt-6.1-terra",
+   "n": 37,
+   "text": "37"
+  },
+  {
+   "model": "gpt-6.1-terra",
+   "n": 37,
+   "text": "37"
+  },
+  {
+   "model": "gpt-6.1-terra",
+   "n": 37,
+   "text": "37"
+  }
+ ],
+ "gpt_pick10": [
+  {
+   "model": "gpt-6.1-terra",
+   "n": 7,
+   "text": "7"
+  },
+  {
+   "model": "gpt-6.1-terra",
+   "n": 7,
+   "text": "7"
+  },
+  {
+   "model": "gpt-6.1-terra",
+   "n": 7,
+   "text": "7"
+  },
+  {
+   "model": "gpt-6.1-terra",
+   "n": 7,
+   "text": "7"
+  },
+  {
+   "model": "gpt-6.1-terra",
+   "n": 7,
+   "text": "7"
+  },
+  {
+   "model": "gpt-6.1-terra",
+   "n": 7,
+   "text": "7"
+  },
+  {
+   "model": "gpt-6.1-terra",
+   "n": 7,
+   "text": "7"
+  },
+  {
+   "model": "gpt-6.1-terra",
+   "n": 7,
+   "text": "7"
+  },
+  {
+   "model": "gpt-6.1-terra",
+   "n": 7,
+   "text": "7"
+  },
+  {
+   "model": "gpt-6.1-terra",
+   "n": 7,
+   "text": "7"
+  }
+ ],
+ "gpt_avoid100": [
+  {
+   "model": "gpt-6.1-terra",
+   "n": 64,
+   "text": "64"
+  },
+  {
+   "model": "gpt-6.1-terra",
+   "n": 82,
+   "text": "82"
+  },
+  {
+   "model": "gpt-6.1-terra",
+   "n": 62,
+   "text": "62"
+  },
+  {
+   "model": "gpt-6.1-terra",
+   "n": 64,
+   "text": "64"
+  },
+  {
+   "model": "gpt-6.1-terra",
+   "n": 64,
+   "text": "64"
+  },
+  {
+   "model": "gpt-6.1-terra",
+   "n": 62,
+   "text": "62"
+  },
+  {
+   "model": "gpt-6.1-terra",
+   "n": 84,
+   "text": "84"
+  },
+  {
+   "model": "gpt-6.1-terra",
+   "n": 84,
+   "text": "84"
+  },
+  {
+   "model": "gpt-6.1-terra",
+   "n": 64,
+   "text": "64"
+  },
+  {
+   "model": "gpt-6.1-terra",
+   "n": 84,
+   "text": "84"
+  }
+ ]
+}

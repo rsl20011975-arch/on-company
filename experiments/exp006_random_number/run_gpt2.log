@@ -1,0 +1,23 @@
+gpt pick10 1 7
+gpt pick10 2 7
+gpt pick10 3 7
+gpt pick10 4 7
+gpt pick10 5 7
+gpt pick10 6 7
+gpt pick10 7 7
+gpt pick10 8 7
+gpt pick10 9 7
+gpt pick10 10 7
+gpt avoid100 1 64
+gpt avoid100 2 82
+gpt avoid100 3 62
+gpt avoid100 4 64
+gpt avoid100 5 64
+gpt avoid100 6 62
+gpt avoid100 7 84
+gpt avoid100 8 84
+gpt avoid100 9 64
+gpt avoid100 10 84
+gpt_pick100 [(37, 20)]
+gpt_pick10 [(7, 10)]
+gpt_avoid100 [(64, 4), (84, 3), (62, 2), (82, 1)]
