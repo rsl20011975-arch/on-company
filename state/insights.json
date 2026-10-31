@@ -1,19 +1,20 @@
 {
   "reel03_exp001": {
-    "at": "2026-10-30T07:30:14.879088+09:00",
+    "at": "2026-10-31T19:32:54.790226+09:00",
     "kind": "REELS",
     "latest": {
-      "views": 121,
-      "reach": 103,
+      "views": 122,
+      "reach": 104,
       "saved": 0,
-      "shares": 0,
       "likes": 0,
       "comments": 0,
       "total_interactions": 0,
-      "ig_reels_avg_watch_time": 10353,
-      "ig_reels_video_view_total_time": 1128568
+      "ig_reels_avg_watch_time": 10265,
+      "ig_reels_video_view_total_time": 1129234
     },
-    "errors": {},
+    "errors": {
+      "shares": "500 {\"message\": \"An unexpected error has occurred. Please retry your request later.\", \"type\": \"OAuthException\", \"is_transient\": true, \"code\": 2, \"fbtrace_id\": \""
+    },
     "history": [
       {
         "at": "2026-10-29T19:18:42.982027+09:00",
@@ -40,11 +41,23 @@
         "total_interactions": 0,
         "ig_reels_avg_watch_time": 10353,
         "ig_reels_video_view_total_time": 1128568
+      },
+      {
+        "at": "2026-10-31T19:32:54.790226+09:00",
+        "age_days": 2,
+        "views": 122,
+        "reach": 104,
+        "saved": 0,
+        "likes": 0,
+        "comments": 0,
+        "total_interactions": 0,
+        "ig_reels_avg_watch_time": 10265,
+        "ig_reels_video_view_total_time": 1129234
       }
     ]
   },
   "post04_exp001": {
-    "at": "2026-10-30T07:30:14.879088+09:00",
+    "at": "2026-10-31T19:32:54.790226+09:00",
     "kind": "CAROUSEL_ALBUM",
     "latest": {
       "views": 0,
@@ -71,6 +84,112 @@
         "total_interactions": 0,
         "follows": 0,
         "profile_visits": 0
+      },
+      {
+        "at": "2026-10-31T19:32:54.790226+09:00",
+        "age_days": 1,
+        "views": 0,
+        "reach": 0,
+        "saved": 0,
+        "shares": 0,
+        "likes": 0,
+        "comments": 0,
+        "total_interactions": 0,
+        "follows": 0,
+        "profile_visits": 0
+      }
+    ]
+  },
+  "reel07_exp004_spelling": {
+    "at": "2026-10-31T19:32:54.790226+09:00",
+    "kind": "REELS",
+    "latest": {
+      "views": 106,
+      "reach": 102,
+      "saved": 0,
+      "shares": 0,
+      "likes": 0,
+      "comments": 0,
+      "total_interactions": 0,
+      "ig_reels_avg_watch_time": 4592,
+      "ig_reels_video_view_total_time": 482251
+    },
+    "errors": {},
+    "history": [
+      {
+        "at": "2026-10-31T19:32:54.790226+09:00",
+        "age_days": 1,
+        "views": 106,
+        "reach": 102,
+        "saved": 0,
+        "shares": 0,
+        "likes": 0,
+        "comments": 0,
+        "total_interactions": 0,
+        "ig_reels_avg_watch_time": 4592,
+        "ig_reels_video_view_total_time": 482251
+      }
+    ]
+  },
+  "reel08_diary_d1": {
+    "at": "2026-10-31T19:32:54.790226+09:00",
+    "kind": "REELS",
+    "latest": {
+      "views": 117,
+      "reach": 108,
+      "saved": 0,
+      "shares": 0,
+      "likes": 0,
+      "comments": 0,
+      "total_interactions": 0,
+      "ig_reels_avg_watch_time": 3499,
+      "ig_reels_video_view_total_time": 384986
+    },
+    "errors": {},
+    "history": [
+      {
+        "at": "2026-10-31T19:32:54.790226+09:00",
+        "age_days": 1,
+        "views": 117,
+        "reach": 108,
+        "saved": 0,
+        "shares": 0,
+        "likes": 0,
+        "comments": 0,
+        "total_interactions": 0,
+        "ig_reels_avg_watch_time": 3499,
+        "ig_reels_video_view_total_time": 384986
+      }
+    ]
+  },
+  "reel04_exp002": {
+    "at": "2026-10-31T19:32:54.790226+09:00",
+    "kind": "REELS",
+    "latest": {
+      "views": 0,
+      "reach": 0,
+      "saved": 0,
+      "shares": 0,
+      "likes": 0,
+      "comments": 0,
+      "total_interactions": 0,
+      "ig_reels_avg_watch_time": 0,
+      "ig_reels_video_view_total_time": 0
+    },
+    "errors": {},
+    "history": [
+      {
+        "at": "2026-10-31T19:32:54.790226+09:00",
+        "age_days": 0,
+        "views": 0,
+        "reach": 0,
+        "saved": 0,
+        "shares": 0,
+        "likes": 0,
+        "comments": 0,
+        "total_interactions": 0,
+        "ig_reels_avg_watch_time": 0,
+        "ig_reels_video_view_total_time": 0
       }
     ]
   }
