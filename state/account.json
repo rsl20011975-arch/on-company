@@ -14,6 +14,11 @@
       "date": "2026-10-31",
       "followers": 0,
       "media": 5
+    },
+    {
+      "date": "2026-11-01",
+      "followers": 0,
+      "media": 7
     }
   ],
   "raw": {
@@ -24,7 +29,7 @@
         "title": "도달한 계정",
         "description": "광고를 포함하여 회원님의 콘텐츠를 1회 이상 조회한 고유 계정 수. 콘텐츠에는 게시물, 스토리, 릴스, 동영상 및 라이브 방송이 포함됩니다. 도달은 같은 계정에서 콘텐츠를 여러 번 본 횟수까지 집계하는 노출과는 다른 개념입니다. 이 지표는 추산치이며 개발 중입니다.",
         "total_value": {
-          "value": 108,
+          "value": 215,
           "breakdowns": [
             {
               "dimension_keys": [
@@ -35,7 +40,7 @@
                   "dimension_values": [
                     "NON_FOLLOWER"
                   ],
-                  "value": 108
+                  "value": 215
                 }
               ]
             }
@@ -51,7 +56,7 @@
         "title": "조회수",
         "description": "콘텐츠가 재생되거나 표시된 횟수. 콘텐츠에는 릴스, 게시물, 스토리가 포함됩니다.",
         "total_value": {
-          "value": 117
+          "value": 253
         },
         "id": "17841416466936492/insights/views/day"
       }
