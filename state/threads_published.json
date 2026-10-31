@@ -64,6 +64,12 @@
     "source": "experiments/exp002_diverse/summary.md"
   },
   "th010_interventions_d1": {
-    "intent": "2026-10-31T23:02:29.464984+09:00"
+    "ids": [
+      "18123781675943029",
+      "17914059150518762",
+      "18099586802683251"
+    ],
+    "at": "2026-10-31T23:03:05.844122+09:00",
+    "source": "intervention_log.md"
   }
 }
