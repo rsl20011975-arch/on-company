@@ -5,7 +5,7 @@
   check     : 연결 점검 (계정·한도·토큰·공개 URL) - 발행하지 않는다
 """
 import json, sys, traceback, datetime as dt
-from . import store, repo_lock, publish, threads_publish, collect, comments, tokens, ig, brief
+from . import store, repo_lock, publish, threads_publish, collect, comments, tokens, ig, brief, ceo_watch
 from .notify import send
 from .redact import redact
 from .config import QUEUE
@@ -44,7 +44,7 @@ def watchdog():
 
 
 def main(task):
-    steps = {"daily": [store.pull, tokens.run, publish.run, threads_publish.run, comments.fetch, watchdog, brief.run],
+    steps = {"daily": [store.pull, tokens.run, publish.run, threads_publish.run, comments.fetch, watchdog, ceo_watch.run, brief.run],
              "collect": [store.pull, collect.run],
              "comments": [store.pull, comments.fetch, comments.post],
              "check": [store.pull, lambda: print(json.dumps({"me": ig.me(), "limit": ig.publishing_limit()}, ensure_ascii=False))]}[task]
