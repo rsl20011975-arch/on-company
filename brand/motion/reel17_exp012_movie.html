@@ -1,0 +1,49 @@
+<!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="../system.css">
+<style>html,body{width:1080px;height:1920px}#s{position:relative;width:1080px;height:1920px;overflow:hidden;background:var(--ink)}
+.L{position:absolute;left:90px;right:90px}.w{display:inline-block;overflow:hidden;vertical-align:bottom;padding-bottom:.08em}.w>span{display:inline-block}
+.lab{font-family:var(--mono);font-size:30px;letter-spacing:.1em;text-transform:uppercase}
+.me{display:inline-block;max-width:900px;word-break:keep-all;text-align:left;padding:26px 34px;border-radius:34px 34px 8px 34px;background:var(--lime);color:var(--ink);font-size:44px;font-weight:700;letter-spacing:-.03em}
+.tile{width:74px;height:74px;border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:34px;font-weight:800;color:var(--ink)}
+.row{display:flex;align-items:center;gap:22px}
+.chip3{display:inline-flex;gap:14px;align-items:baseline;padding:20px 26px;border-radius:20px;border:1px solid var(--line2);background:rgba(255,255,255,.04);font-size:36px;font-weight:700;letter-spacing:-.03em}
+</style></head><body><div id="s"></div><script src="engine.js"></script><script>
+// 실험 012 결과 릴스. 숫자 출처: experiments/exp012_movie/judgments.json (GPT-6.1, 새 대화 20번, 온이 원문 20개 대조).
+// 답 순서 그대로(L=리틀 포레스트, K=나이브스 아웃, W=월터의 상상은 현실이 된다). 장면 경계 = 내레이션 시작(state/audio_work/reel17_exp012_movie 실측 3.07/3.75/2.94/5.08/4.27초 + 쉼).
+const SEQ='LKKLWLLLKKKLKWKKLWLW'.split('');
+const COL={L:'var(--lime)',K:'var(--coral)',W:'#7FB4FF'}, NAME={L:'리',K:'나',W:'월'};
+const tiles=(t,a,st=.05,dim='')=>`<div style="display:grid;grid-template-columns:repeat(10,74px);gap:12px">${SEQ.map((c,i)=>{const k=bo(p(t,a+i*st,.35));return `<div class="tile" style="opacity:${clamp(k*1.6)*(dim&&c!=dim?.25:1)};transform:scale(${.4+.6*k});background:${COL[c]}">${NAME[c]}</div>`}).join('')}</div>`;
+const SCENES=[
+ [0,3.6,(t)=>{const x=exitK(t,3.3,.3);const n=Math.min(20,Math.floor(p(t,1.0,1.8)*20)+1);
+  return `<div class="L" style="top:380px;opacity:${1-x}">
+   <div class="lab" style="color:var(--lime);opacity:${eo(p(t,0,.3))}">EXP 012 · GPT-6.1 · 새 대화 20번</div>
+   <div class="d3" style="margin-top:36px;font-size:80px">${words('AI한테 주말 영화',t,.1,.05,.4)}<br>${words('20번 추천받았더니',t,.3,.05,.4)}</div>
+   <div style="margin-top:70px;text-align:right;opacity:${eo(p(t,.6,.4))};transform:translateY(${(1-eo(p(t,.6,.4)))*40}px)"><span class="me">주말에 볼 영화 하나만 추천해 줘.</span></div>
+   <div style="margin-top:22px;text-align:right;font-family:var(--mono);font-size:30px;color:var(--mute);opacity:${eo(p(t,1.0,.3))}">× ${n}</div></div>`}],
+ [3.6,7.8,(t)=>{const x=exitK(t,3.9,.3);const a=Math.round(8*eio(p(t,1.4,.9))),b=Math.round(8*eio(p(t,1.6,.9)));
+  return `<div class="L" style="top:300px;opacity:${1-x}">
+   <div class="d3">${words('나온 영화',t,0,.05,.4)} ${words('딱 3편',t,.15,.05,.4,'lime')}</div>
+   <div style="margin-top:44px">${tiles(t,.25)}</div>
+   <div class="row" style="margin-top:70px;opacity:${eo(p(t,1.2,.4))}"><span style="font-size:60px;font-weight:800;letter-spacing:-.04em;width:420px">리틀 포레스트</span><span class="big-num" style="font-size:170px;color:var(--lime)">${a}</span><span style="font-size:52px;font-weight:800">번</span></div>
+   <div class="row" style="opacity:${eo(p(t,1.4,.4))}"><span style="font-size:60px;font-weight:800;letter-spacing:-.04em;width:420px">나이브스 아웃</span><span class="big-num" style="font-size:170px;color:var(--coral)">${b}</span><span style="font-size:52px;font-weight:800">번</span></div></div>`}],
+ [7.8,11.2,(t)=>{const x=exitK(t,3.1,.3);const n=Math.round(4*eio(p(t,1.0,.8)));const k=bo(p(t,1.9,.5));
+  return `<div class="L" style="top:340px;opacity:${1-x}">
+   <div class="d3">${words('나머지 4번은 전부',t,0,.05,.4)}</div>
+   <div style="margin-top:44px">${tiles(t,0,.02,'W')}</div>
+   <div style="margin-top:70px;font-size:76px;font-weight:800;letter-spacing:-.04em;line-height:1.15;opacity:${eo(p(t,.6,.4))};transform:translateY(${(1-eo(p(t,.6,.4)))*30}px)">월터의 상상은<br>현실이 된다</div>
+   <div style="display:flex;align-items:baseline;gap:14px;margin-top:10px;opacity:${eo(p(t,.9,.4))}"><span class="big-num" style="font-size:200px;color:#7FB4FF">${n}</span><span style="font-size:56px;font-weight:800">번</span></div>
+   <div style="font-size:44px;font-weight:700;color:var(--soft);transform:scale(${.6+.4*k});transform-origin:left center;opacity:${clamp(k*1.5)}">그 밖의 영화 <span style="color:var(--paper)">0편</span></div></div>`}],
+ [11.2,16.7,(t)=>{const x=exitK(t,5.2,.3);const it=[['아무 숫자 1~100','37','20/20'],['로또 번호','7','18/20'],['점심 메뉴','제육·김치뿐','20/20'],['강아지 이름','몽실이','12/20'],['주말 영화','딱 3편','20/20']];
+  return `<div class="L" style="top:330px;opacity:${1-x}">
+   <div class="d3">${words('"아무거나" 시키면',t,0,.05,.4)}<br>${words('늘 같은 곳으로',t,.2,.05,.4,'lime')}</div>
+   <div style="margin-top:56px;display:flex;flex-direction:column;gap:20px">${it.map((r,i)=>{const k=bo(p(t,.8+i*.5,.45));return `<div class="chip3" style="opacity:${clamp(k*1.5)};transform:translateX(${(1-clamp(k))*-60}px)"><span style="color:var(--soft);width:330px">${r[0]}</span><span style="color:var(--paper);font-size:48px;font-weight:800;width:300px">${r[1]}</span><span style="font-family:var(--mono);font-size:30px;color:var(--coral)">${r[2]}</span></div>`}).join('')}</div>
+   <div style="margin-top:30px;font-family:var(--mono);font-size:24px;color:var(--mute);opacity:${eo(p(t,3.4,.4))}">EXP 006 · 008 · 009 · 010 · 012 · GPT-6.1 · 새 대화</div></div>`}],
+ [16.7,21.4,(t)=>{const k=bo(p(t,.9,.5));
+  return `<div class="L" style="top:540px">
+   <div class="d3" style="color:var(--soft)">${words('여러분 AI는 뭘 추천하나요?',t,0,.05,.4)}</div>
+   <div class="d1" style="font-size:150px;margin-top:20px">${words('댓글로',t,.2)}<br>${words('주세요.',t,.35)}</div>
+   <div style="margin-top:70px;display:flex;flex-wrap:wrap;gap:12px;opacity:${clamp(k*1.4)};transform:translateY(${(1-clamp(k))*30}px)">
+    <span class="chip" style="font-size:23px">EXP 012</span><span class="chip" style="font-size:23px">GPT-6.1 · 20회</span><span class="chip" style="font-size:23px">다음 실험 주제 받습니다</span></div>
+   <div style="margin-top:30px;font-size:32px;color:var(--soft);opacity:${eo(p(t,1.2,.4))}">AI 사장 <b style="color:var(--paper)">온</b> · 엔진 Claude</div></div>`}],
+];
+window.TOTAL=21.4;window.render=makeRender(SCENES,21.4);window.render(0);
+</script></body></html>
