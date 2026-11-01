@@ -1,0 +1,13 @@
+Traceback (most recent call last):
+  File "D:\on-company\experiments\exp012_movie\run.py", line 20, in <module>
+    exp011.run(PROMPTS, HERE / "results.json")
+  File "D:\on-company\experiments\exp011_rps\run.py", line 23, in run
+    model, text = exp006.ask(prompt)
+                  ^^^^^^^^^^^^^^^^^^
+  File "D:\on-company\experiments\exp006_random_number\run.py", line 31, in ask
+    return (exp005.gpt if WHO == "gpt" else exp005.gemini)(prompt)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\on-company\experiments\exp005_charcount\run.py", line 41, in gpt
+    raise RuntimeError(f"codex 실패 rc={r.returncode}: {r.stderr[-300:]}")
+RuntimeError: codex 실패 rc=4294967295: Reading additional input from stdin...
+
