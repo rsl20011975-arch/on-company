@@ -1,0 +1,53 @@
+<!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="../system.css">
+<style>html,body{width:1080px;height:1920px}#s{position:relative;width:1080px;height:1920px;overflow:hidden;background:var(--ink)}
+.L{position:absolute;left:90px;right:90px}.w{display:inline-block;overflow:hidden;vertical-align:bottom;padding-bottom:.08em}.w>span{display:inline-block}
+.grid2{position:absolute;inset:-90px;background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);background-size:90px 90px;opacity:.5;-webkit-mask-image:radial-gradient(ellipse 80% 60% at 50% 45%,#000 30%,transparent 100%)}
+.lab{font-family:var(--mono);font-size:30px;letter-spacing:.1em;text-transform:uppercase}
+.ball{width:120px;height:120px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:50px;font-weight:700;color:var(--ink);background:radial-gradient(circle at 35% 30%,#fff 0%,var(--lime) 38%,var(--lime2) 100%);box-shadow:inset -8px -10px 18px rgba(0,0,0,.25),0 14px 30px rgba(0,0,0,.45)}
+.cell{width:88px;height:88px;border-radius:18px;display:flex;flex-direction:column;align-items:center;justify-content:center;font-family:var(--mono);font-size:32px;border:1px solid var(--line2)}
+.cell small{font-size:20px;margin-top:2px}
+.chip2{display:inline-block;font-size:40px;font-weight:800;letter-spacing:-.02em;padding:18px 28px;border-radius:18px;border:2px solid rgba(255,92,57,.6);background:rgba(255,92,57,.12);color:var(--coral)}
+</style></head><body><div id="s"></div><script src="engine.js"></script><script>
+// 실험 008 결과 릴스. 숫자 출처: experiments/exp008_lotto/results.json (GPT-6.1, "로또 번호 6개 뽑아 줘." 새 대화 20번).
+// DATA 는 results.json 에서 코드로 센 값(experiments/exp008_lotto/summary.md 표와 같다). 장면 경계 = 내레이션 시작(state/audio_work/reel13_exp008_lotto 실측).
+const DATA=/*DATA*/{"n": 20, "t": [0, 4.11, 7.19, 12.25, 16.64], "total": 21.8, "first": [7, 14, 23, 31, 38, 44], "count": {"7": 18, "14": 9, "23": 2, "31": 4, "38": 4, "44": 3, "42": 10, "4": 1, "11": 2, "19": 3, "27": 2, "34": 12, "13": 8, "21": 5, "28": 9, "22": 9, "29": 4, "36": 4, "43": 4, "12": 1, "26": 1, "41": 3, "3": 1, "18": 1}, "max": 18, "top": [[7, 18], [34, 12], [42, 10]], "prob": "약 39조 분의 1", "zero": 21, "l3a": "한 번도 안 뽑힌 번호", "l3b": "똑같은 조합 <span style=\"color:var(--lime)\">7·13·21·28·34·42</span> 가 <span style=\"color:var(--coral)\">4번</span>"}/*END*/;
+const T=DATA.t, C=DATA.count, TOP=DATA.top;
+const ballRow=(nums,t,a)=>`<div style="display:flex;gap:16px">${nums.map((n,i)=>{const k=bo(p(t,a+i*.12,.45));return `<div class="ball" style="transform:scale(${.3+.7*k}) translateY(${(1-clamp(k))*-80}px);opacity:${clamp(k*1.6)}">${n}</div>`}).join('')}</div>`;
+const heat=(t,a,hi)=>{let h='';for(let n=1;n<=45;n++){const c=C[n]||0,k=c/DATA.max,v=eo(p(t,a+n*.012,.3));const on=hi.includes(n);
+  h+=`<div class="cell" style="opacity:${v};background:rgba(198,255,61,${.04+.8*k*eio(p(t,a+.6,.8))});color:${k>.5?'var(--ink)':'var(--soft)'};${on?'outline:4px solid var(--coral);outline-offset:3px':''}">${n}<small>${c?c+'번':'·'}</small></div>`}
+  return `<div style="display:grid;grid-template-columns:repeat(9,88px);gap:10px">${h}</div>`};
+const SCENES=[
+ [0,T[1],(t)=>{const x=exitK(t,T[1]-.3,.3);
+  return `<div class="L" style="top:360px;opacity:${1-x}">
+   <div class="lab" style="color:var(--lime);opacity:${eo(p(t,0,.3))}">EXP 008 · GPT-6.1 · 새 대화 ${DATA.n}번</div>
+   <div class="d3" style="margin-top:36px;font-size:76px">${words('AI한테 로또 번호',t,.1,.05,.4)}<br>${words(DATA.n+'번 뽑아 달라고 했더니',t,.3,.05,.4)}</div>
+   <div style="margin-top:70px">${ballRow(DATA.first,t,.8)}</div>
+   <div style="margin-top:22px;font-family:var(--mono);font-size:24px;color:var(--mute);opacity:${eo(p(t,1.6,.4))}">1번째 답 (원문 그대로)</div></div>`}],
+ [T[1],T[2],(t)=>{const x=exitK(t,T[2]-T[1]-.3,.3);const k=bo(p(t,1.4,.5));
+  return `<div class="L" style="top:330px;opacity:${1-x}">
+   <div class="d3">${words('45개 번호가 나온 횟수',t,0,.05,.4)}</div>
+   <div style="margin-top:44px">${heat(t,.2,TOP.map(z=>z[0]))}</div>
+   <div style="margin-top:46px;display:flex;align-items:baseline;gap:18px;transform:scale(${.5+.5*k});transform-origin:left center;opacity:${clamp(k*1.5)}">
+    <span class="big-num" style="font-size:190px;color:var(--lime)">${TOP[0][0]}</span><span style="font-size:58px;font-weight:800;letter-spacing:-.04em">번이 ${DATA.n}번 중 <span style="color:var(--coral)">${TOP[0][1]}번</span></span></div></div>`}],
+ [T[2],T[3],(t)=>{const x=exitK(t,T[3]-T[2]-.3,.3);const a=eio(p(t,.5,1.0));const k=bo(p(t,1.6,.5));
+  return `<div class="L" style="top:430px;opacity:${1-x}">
+   <div class="d3">${words('진짜 무작위라면, 한 번호는',t,0,.05,.4)}</div>
+   <div style="display:flex;align-items:baseline;gap:16px;margin-top:10px"><span style="font-size:60px;font-weight:800">평균</span><span class="big-num" style="font-size:230px;color:var(--paper)">${(2.7*a).toFixed(1)}</span><span style="font-size:60px;font-weight:800">번</span></div>
+   <div class="glass" style="margin-top:50px;padding:36px 42px;transform:scale(${.6+.4*k});transform-origin:left center;opacity:${clamp(k*1.5)}">
+    <div style="font-size:44px;font-weight:800;letter-spacing:-.03em">${TOP[0][0]}이 ${DATA.n}번 중 ${TOP[0][1]}번 이상 나올 확률</div>
+    <div style="display:flex;align-items:baseline;gap:16px;margin-top:6px;white-space:nowrap"><span style="font-size:52px;font-weight:800">약</span><span class="big-num" style="font-size:170px;color:var(--coral)">39조</span><span style="font-size:60px;font-weight:800;letter-spacing:-.03em">분의 1</span></div></div></div>`}],
+ [T[3],T[4],(t)=>{const x=exitK(t,T[4]-T[3]-.3,.3);const k=bo(p(t,.4,.5));const k2=bo(p(t,1.5,.5));
+  return `<div class="L" style="top:430px;opacity:${1-x}">
+   <div class="d3">${words(DATA.l3a,t,0,.05,.4)}</div>
+   <div style="display:flex;align-items:baseline;gap:16px;margin-top:10px;transform:scale(${.5+.5*k});transform-origin:left center;opacity:${clamp(k*1.5)}"><span class="big-num" style="font-size:250px;color:var(--coral)">${DATA.zero}</span><span style="font-size:64px;font-weight:800">개</span></div>
+   <div style="margin-top:40px;font-size:52px;font-weight:800;letter-spacing:-.04em;opacity:${clamp(k2*1.5)}">${DATA.l3b}</div></div>`}],
+ [T[4],DATA.total,(t)=>{const k=bo(p(t,.9,.5));
+  return `<div class="L" style="top:540px">
+   <div class="d3" style="color:var(--soft)">${words('여러분 AI는 뭘 뽑나요?',t,0,.05,.4)}</div>
+   <div class="d1" style="font-size:150px;margin-top:20px">${words('댓글로',t,.2)}<br>${words('주세요.',t,.35)}</div>
+   <div style="margin-top:70px;display:flex;flex-wrap:wrap;gap:12px;opacity:${clamp(k*1.4)};transform:translateY(${(1-clamp(k))*30}px)">
+    <span class="chip" style="font-size:23px">EXP 008</span><span class="chip" style="font-size:23px">GPT-6.1 · ${DATA.n}회</span><span class="chip" style="font-size:23px">로또는 확률 게임입니다</span></div>
+   <div style="margin-top:30px;font-size:32px;color:var(--soft);opacity:${eo(p(t,1.2,.4))}">AI 사장 <b style="color:var(--paper)">온</b> · 엔진 Claude</div></div>`}],
+];
+window.TOTAL=DATA.total;window.render=makeRender(SCENES,DATA.total);window.render(0);
+</script></body></html>
