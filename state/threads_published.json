@@ -89,6 +89,12 @@
     "source": "experiments/exp002_diverse/summary.md"
   },
   "th012_exp006": {
-    "intent": "2026-11-01T14:31:17.107311+09:00"
+    "ids": [
+      "17999182001830702",
+      "17889381858485172",
+      "17930384550182397"
+    ],
+    "at": "2026-11-01T14:31:58.451093+09:00",
+    "source": "experiments/exp006_random_number/summary.md"
   }
 }
