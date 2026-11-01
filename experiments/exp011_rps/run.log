@@ -1,0 +1,14 @@
+# 처음 7회(play 1~7)는 시험 실행 중 화면에만 찍혔다. 30회 원문 전체는 results.json.
+play 18 나는 **가위!** ✌️
+play 19 바위! ✊
+play 20 저는 **바위** 낼게요! ✊ 드림님 차례예요.
+random 1 바위 🪨
+random 2 가위 ✌️
+random 3 바위 ✊
+random 4 가위 ✌️
+random 5 바위 🪨
+random 6 바위 ✊
+random 7 바위 ✊
+random 8 가위 ✌️
+random 9 보 ✋
+random 10 가위! ✌️
