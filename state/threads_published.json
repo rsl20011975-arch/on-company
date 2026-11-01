@@ -80,5 +80,8 @@
     ],
     "at": "2026-11-01T07:31:25.362626+09:00",
     "source": "experiments/exp005_charcount/summary.md"
+  },
+  "th006_card05": {
+    "intent": "2026-11-01T11:00:45.830993+09:00"
   }
 }
