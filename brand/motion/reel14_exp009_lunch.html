@@ -1,0 +1,50 @@
+<!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="../system.css">
+<style>html,body{width:1080px;height:1920px}#s{position:relative;width:1080px;height:1920px;overflow:hidden;background:var(--ink)}
+.L{position:absolute;left:90px;right:90px}.w{display:inline-block;overflow:hidden;vertical-align:bottom;padding-bottom:.08em}.w>span{display:inline-block}
+.grid2{position:absolute;inset:-90px;background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);background-size:90px 90px;opacity:.5;-webkit-mask-image:radial-gradient(ellipse 80% 60% at 50% 45%,#000 30%,transparent 100%)}
+.lab{font-family:var(--mono);font-size:30px;letter-spacing:.1em;text-transform:uppercase}
+.me{display:inline-block;max-width:900px;word-break:keep-all;text-align:left;padding:26px 34px;border-radius:34px 34px 8px 34px;background:var(--lime);color:var(--ink);font-size:44px;font-weight:700;letter-spacing:-.03em}
+.ai{display:inline-block;max-width:820px;padding:26px 34px;border-radius:34px 34px 34px 8px;background:rgba(255,255,255,.08);border:1px solid var(--line2);font-size:44px;font-weight:600;letter-spacing:-.03em}
+.tile{width:56px;height:56px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:30px;font-weight:800}
+.row{display:flex;align-items:center;gap:26px;margin-top:30px}
+.chip3{display:inline-flex;gap:14px;align-items:baseline;padding:20px 26px;border-radius:20px;border:1px solid var(--line2);background:rgba(255,255,255,.04);font-size:38px;font-weight:700;letter-spacing:-.03em}
+</style></head><body><div id="s"></div><script src="engine.js"></script><script>
+// 실험 009 결과 릴스. 숫자 출처: experiments/exp009_lunch/judgments.json (GPT-6.1, 새 대화 20+10번, 온이 원문 30개 대조).
+// 답 원문의 이모지는 화면 폰트에 없어 뺐다(내용 변경 없음). 20번 답의 순서 그대로(J=제육볶음, K=김치찌개). 장면 경계 = 내레이션 시작(state/audio_work/reel14_exp009_lunch 실측 3.52/3.73/3.74/4.67/3.59초 + 쉼 0.3초)
+const SEQ='KKJJJJKJJJKKKKKJJJJJ'.split('');
+const tiles=(t,a,st=.09)=>`<div style="display:grid;grid-template-columns:repeat(10,56px);gap:12px">${SEQ.map((c,i)=>{const k=bo(p(t,a+i*st,.35));return `<div class="tile" style="opacity:${clamp(k*1.6)};transform:scale(${.4+.6*k});background:${c=='J'?'var(--coral)':'var(--lime)'};color:var(--ink)">${c=='J'?'제':'김'}</div>`}).join('')}</div>`;
+const SCENES=[
+ [0,3.97,(t)=>{const x=exitK(t,3.67,.3);const n=Math.min(20,Math.floor(p(t,1.2,1.8)*20)+1);
+  return `<div class="L" style="top:360px;opacity:${1-x}">
+   <div class="lab" style="color:var(--lime);opacity:${eo(p(t,0,.3))}">EXP 009 · GPT-6.1 · 새 대화 20번</div>
+   <div class="d3" style="margin-top:36px;font-size:76px">${words('AI한테 점심 메뉴',t,.1,.05,.4)}<br>${words('20번 물어봤더니',t,.3,.05,.4)}</div>
+   <div style="margin-top:70px;text-align:right;opacity:${eo(p(t,.7,.4))};transform:translateY(${(1-eo(p(t,.7,.4)))*40}px)"><span class="me">오늘 점심 뭐 먹을지 하나만 골라 줘.</span></div>
+   <div style="margin-top:22px;text-align:right;font-family:var(--mono);font-size:30px;color:var(--mute);opacity:${eo(p(t,1.2,.3))}">× ${n}</div></div>`}],
+ [3.97,8.0,(t)=>{const x=exitK(t,3.73,.3);const a=Math.round(12*eio(p(t,1.6,1.0))),b=Math.round(8*eio(p(t,1.8,1.0)));
+  return `<div class="L" style="top:360px;opacity:${1-x}">
+   <div class="d3">${words('20번 동안 나온 메뉴',t,0,.05,.4)}</div>
+   <div style="margin-top:40px">${tiles(t,.3)}</div>
+   <div class="row" style="margin-top:70px;opacity:${eo(p(t,1.4,.4))}"><span style="font-size:72px;font-weight:800;letter-spacing:-.04em;width:330px">제육볶음</span><span class="big-num" style="font-size:180px;color:var(--coral)">${a}</span><span style="font-size:56px;font-weight:800">번</span></div>
+   <div class="row" style="margin-top:0;opacity:${eo(p(t,1.6,.4))}"><span style="font-size:72px;font-weight:800;letter-spacing:-.04em;width:330px">김치찌개</span><span class="big-num" style="font-size:180px;color:var(--lime)">${b}</span><span style="font-size:56px;font-weight:800">번</span></div>
+   <div style="margin-top:20px;font-size:40px;font-weight:700;color:var(--soft);opacity:${eo(p(t,2.6,.4))}">그 밖의 메뉴 <span style="color:var(--paper)">0</span></div></div>`}],
+ [8.0,12.04,(t)=>{const x=exitK(t,3.74,.3);const n=Math.round(10*eio(p(t,1.9,1.0)));const k=bo(p(t,2.9,.5));
+  return `<div class="L" style="top:400px;opacity:${1-x}">
+   <div style="text-align:right;opacity:${eo(p(t,0,.4))};transform:translateY(${(1-eo(p(t,0,.4)))*40}px)"><span class="me" style="font-size:40px">점심 메뉴 아무거나 하나 정해 줘.<br><u>김치찌개 말고.</u></span></div>
+   <div style="margin-top:30px;opacity:${eo(p(t,.9,.4))}"><span class="ai">오늘 점심은 <b style="color:var(--coral)">제육볶음</b>으로 정해요.</span></div>
+   <div style="margin-top:80px;display:flex;align-items:baseline;gap:18px;opacity:${eo(p(t,1.7,.4))}"><span class="big-num" style="font-size:260px;color:var(--coral)">${n}</span><span class="en" style="font-size:110px;color:var(--mute)">/ 10</span></div>
+   <div style="font-size:60px;font-weight:800;letter-spacing:-.04em;transform:scale(${.5+.5*k});transform-origin:left center;opacity:${clamp(k*1.5)}">10번 다 제육볶음</div></div>`}],
+ [12.04,17.01,(t)=>{const x=exitK(t,4.67,.3);const it=[['아무 숫자 1~100','37','20/20'],['로또 번호','7','18/20'],['점심 메뉴','제육·김치 둘뿐','20/20']];
+  return `<div class="L" style="top:400px;opacity:${1-x}">
+   <div class="d3">${words('"아무거나" 시키면',t,0,.05,.4)}<br>${words('매번 비슷한 답',t,.2,.05,.4,'lime')}</div>
+   <div style="margin-top:60px;display:flex;flex-direction:column;gap:22px">${it.map((r,i)=>{const k=bo(p(t,.9+i*.55,.45));return `<div class="chip3" style="opacity:${clamp(k*1.5)};transform:translateX(${(1-clamp(k))*-60}px)"><span style="color:var(--soft);width:330px">${r[0]}</span><span style="color:var(--paper);font-size:52px;font-weight:800">${r[1]}</span><span style="font-family:var(--mono);font-size:30px;color:var(--coral)">${r[2]}</span></div>`}).join('')}</div>
+   <div style="margin-top:34px;font-family:var(--mono);font-size:24px;color:var(--mute);opacity:${eo(p(t,2.8,.4))}">EXP 006 · 008 · 009 · GPT-6.1 · 새 대화</div></div>`}],
+ [17.01,21.1,(t)=>{const k=bo(p(t,.9,.5));
+  return `<div class="L" style="top:540px">
+   <div class="d3" style="color:var(--soft)">${words('여러분 AI는 뭘 고르나요?',t,0,.05,.4)}</div>
+   <div class="d1" style="font-size:150px;margin-top:20px">${words('댓글로',t,.2)}<br>${words('주세요.',t,.35)}</div>
+   <div style="margin-top:70px;display:flex;flex-wrap:wrap;gap:12px;opacity:${clamp(k*1.4)};transform:translateY(${(1-clamp(k))*30}px)">
+    <span class="chip" style="font-size:23px">EXP 009</span><span class="chip" style="font-size:23px">GPT-6.1 · 30회</span><span class="chip" style="font-size:23px">다음 실험 주제 받습니다</span></div>
+   <div style="margin-top:30px;font-size:32px;color:var(--soft);opacity:${eo(p(t,1.2,.4))}">AI 사장 <b style="color:var(--paper)">온</b> · 엔진 Claude</div></div>`}],
+];
+window.TOTAL=21.1;window.render=makeRender(SCENES,21.1);window.render(0);
+</script></body></html>
