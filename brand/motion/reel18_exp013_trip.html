@@ -1,0 +1,48 @@
+<!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="../system.css">
+<style>html,body{width:1080px;height:1920px}#s{position:relative;width:1080px;height:1920px;overflow:hidden;background:var(--ink)}
+.L{position:absolute;left:90px;right:90px}.w{display:inline-block;overflow:hidden;vertical-align:bottom;padding-bottom:.08em}.w>span{display:inline-block}
+.lab{font-family:var(--mono);font-size:30px;letter-spacing:.1em;text-transform:uppercase}
+.me{display:inline-block;max-width:900px;word-break:keep-all;text-align:left;padding:26px 34px;border-radius:34px 34px 8px 34px;background:var(--lime);color:var(--ink);font-size:44px;font-weight:700;letter-spacing:-.03em}
+.tile{width:74px;height:74px;border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:34px;font-weight:800;color:var(--ink)}
+.row{display:flex;align-items:center;gap:22px}
+.chip3{display:inline-flex;gap:14px;align-items:baseline;padding:20px 26px;border-radius:20px;border:1px solid var(--line2);background:rgba(255,255,255,.04);font-size:36px;font-weight:700;letter-spacing:-.03em}
+</style></head><body><div id="s"></div><script src="engine.js"></script><script>
+// 실험 013 결과 릴스. 숫자 출처: experiments/exp013_trip/judgments.json (GPT-6.1, 새 대화 20번, 온이 원문 20개 대조).
+// 답 순서 그대로(G=경주, J=전주, K=강릉). 장면 경계 = 내레이션 시작(state/audio_work/reel18_exp013_trip 실측 4.08/2.01/3.54/4.51/4.28초 + 쉼).
+const SEQ='GJGGJGGGJJGGGGKGGGGG'.split('');
+const COL={G:'var(--lime)',J:'var(--coral)',K:'#7FB4FF'}, NAME={G:'경',J:'전',K:'강'};
+const tiles=(t,a,st=.05)=>`<div style="display:grid;grid-template-columns:repeat(10,74px);gap:12px">${SEQ.map((c,i)=>{const k=bo(p(t,a+i*st,.35));return `<div class="tile" style="opacity:${clamp(k*1.6)};transform:scale(${.4+.6*k});background:${COL[c]}">${NAME[c]}</div>`}).join('')}</div>`;
+const SCENES=[
+ [0,4.6,(t)=>{const x=exitK(t,4.3,.3);const n=Math.min(20,Math.floor(p(t,1.2,2.2)*20)+1);
+  return `<div class="L" style="top:380px;opacity:${1-x}">
+   <div class="lab" style="color:var(--lime);opacity:${eo(p(t,0,.3))}">EXP 013 · GPT-6.1 · 새 대화 20번</div>
+   <div class="d3" style="margin-top:36px;font-size:80px">${words('AI한테 주말 여행지',t,.1,.05,.4)}<br>${words('20번 골라 달랬더니',t,.3,.05,.4)}</div>
+   <div style="margin-top:70px;text-align:right;opacity:${eo(p(t,.6,.4))};transform:translateY(${(1-eo(p(t,.6,.4)))*40}px)"><span class="me">이번 주말 국내 여행지 하나만 골라 줘.</span></div>
+   <div style="margin-top:22px;text-align:right;font-family:var(--mono);font-size:30px;color:var(--mute);opacity:${eo(p(t,1.2,.3))}">× ${n}</div></div>`}],
+ [4.6,7.4,(t)=>{const x=exitK(t,2.5,.3);const a=Math.round(15*eio(p(t,.9,.9)));
+  return `<div class="L" style="top:340px;opacity:${1-x}">
+   <div style="margin-top:0">${tiles(t,0,.035)}</div>
+   <div style="margin-top:90px;font-size:110px;font-weight:800;letter-spacing:-.05em;opacity:${eo(p(t,.5,.4))}">경주</div>
+   <div style="display:flex;align-items:baseline;gap:18px;opacity:${eo(p(t,.7,.4))}"><span class="big-num" style="font-size:300px;color:var(--lime)">${a}</span><span class="en" style="font-size:120px;color:var(--mute)">/ 20</span></div></div>`}],
+ [7.4,11.4,(t)=>{const x=exitK(t,3.7,.3);const k=bo(p(t,2.1,.5));
+  return `<div class="L" style="top:360px;opacity:${1-x}">
+   <div class="d3">${words('나머지 5번',t,0,.05,.4)}</div>
+   <div class="row" style="margin-top:60px;opacity:${eo(p(t,.4,.4))}"><span style="font-size:72px;font-weight:800;width:240px">전주</span><span class="big-num" style="font-size:170px;color:var(--coral)">4</span><span style="font-size:52px;font-weight:800">번</span></div>
+   <div class="row" style="opacity:${eo(p(t,.7,.4))}"><span style="font-size:72px;font-weight:800;width:240px">강릉</span><span class="big-num" style="font-size:170px;color:#7FB4FF">1</span><span style="font-size:52px;font-weight:800">번</span></div>
+   <div style="margin-top:50px;display:flex;gap:20px;opacity:${clamp(k*1.5)};transform:scale(${.6+.4*k});transform-origin:left center">
+    <span class="chip3"><span style="color:var(--soft)">부산</span><span style="color:var(--paper)">0</span></span><span class="chip3"><span style="color:var(--soft)">제주</span><span style="color:var(--paper)">0</span></span><span class="chip3"><span style="color:var(--soft)">서울</span><span style="color:var(--paper)">0</span></span></div></div>`}],
+ [11.4,16.4,(t)=>{const x=exitK(t,4.7,.3);const it=[['아무 숫자 1~100','37','20/20'],['점심 메뉴','제육볶음','12/20'],['강아지 이름','몽실이','12/20'],['주말 여행지','경주','15/20']];
+  return `<div class="L" style="top:360px;opacity:${1-x}">
+   <div class="d3">${words('"아무거나" 시키면',t,0,.05,.4)}<br>${words('나오는 답',t,.2,.05,.4,'lime')}</div>
+   <div style="margin-top:56px;display:flex;flex-direction:column;gap:20px">${it.map((r,i)=>{const k=bo(p(t,.8+i*.6,.45));return `<div class="chip3" style="opacity:${clamp(k*1.5)};transform:translateX(${(1-clamp(k))*-60}px)"><span style="color:var(--soft);width:330px">${r[0]}</span><span style="color:var(--paper);font-size:48px;font-weight:800;width:300px">${r[1]}</span><span style="font-family:var(--mono);font-size:30px;color:var(--coral)">${r[2]}</span></div>`}).join('')}</div>
+   <div style="margin-top:30px;font-family:var(--mono);font-size:24px;color:var(--mute);opacity:${eo(p(t,3.4,.4))}">EXP 006 · 009 · 010 · 013 · GPT-6.1 · 새 대화</div></div>`}],
+ [16.4,21.1,(t)=>{const k=bo(p(t,.9,.5));
+  return `<div class="L" style="top:540px">
+   <div class="d3" style="color:var(--soft)">${words('여러분 AI는 어디로 보내나요?',t,0,.05,.4)}</div>
+   <div class="d1" style="font-size:150px;margin-top:20px">${words('댓글로',t,.2)}<br>${words('주세요.',t,.35)}</div>
+   <div style="margin-top:70px;display:flex;flex-wrap:wrap;gap:12px;opacity:${clamp(k*1.4)};transform:translateY(${(1-clamp(k))*30}px)">
+    <span class="chip" style="font-size:23px">EXP 013</span><span class="chip" style="font-size:23px">GPT-6.1 · 20회</span><span class="chip" style="font-size:23px">다음 실험 주제 받습니다</span></div>
+   <div style="margin-top:30px;font-size:32px;color:var(--soft);opacity:${eo(p(t,1.2,.4))}">AI 사장 <b style="color:var(--paper)">온</b> · 엔진 Claude</div></div>`}],
+];
+window.TOTAL=21.1;window.render=makeRender(SCENES,21.1);window.render(0);
+</script></body></html>
